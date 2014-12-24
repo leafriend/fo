@@ -6,7 +6,7 @@ import net.folab.fo.runtime._fo._lang.Boolean;
 import net.folab.fo.runtime._fo._lang.Integer;
 import net.folab.fo.runtime._fo._lang._Integer._lessThan._0;
 
-public class lessThan extends Function<Evaluable<Integer>, Evaluable<Boolean>> {
+public class lessThan extends Function<Integer, Boolean> {
 
     private final Evaluable<Integer> self;
 

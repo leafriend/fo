@@ -5,8 +5,7 @@ import net.folab.fo.runtime.Function;
 import net.folab.fo.runtime._fo._lang._Boolean.choose;
 import net.folab.fo.runtime._fo._lang._Boolean._choose.__0._1;
 
-public class _0<T extends Evaluable<T>> extends
-        Function<Evaluable<T>, Evaluable<T>> {
+public class _0<T extends Evaluable<T>> extends Function<T, T> {
 
     private final choose<T> choose;
 

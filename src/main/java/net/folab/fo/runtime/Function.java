@@ -1,9 +1,9 @@
 package net.folab.fo.runtime;
 
-public abstract class Function<P extends Evaluable<?>, R extends Evaluable<?>>
+public abstract class Function<P extends Evaluable<P>, R extends Evaluable<R>>
         implements Evaluable<Function<P, R>> {
 
-    public abstract R apply(P parameter);
+    public abstract Evaluable<R> apply(Evaluable<P> parameter);
 
     public Function<P, R> evaluate() {
         return this;

@@ -5,7 +5,7 @@ import net.folab.fo.runtime.Function;
 import net.folab.fo.runtime._fo._lang.Integer;
 import net.folab.fo.runtime._fo._lang._Integer._add._0;
 
-public class add extends Function<Evaluable<Integer>, Evaluable<Integer>> {
+public class add extends Function<Integer, Integer> {
 
     private final Evaluable<Integer> self;
 

@@ -5,8 +5,7 @@ import net.folab.fo.runtime.Function;
 import net.folab.fo.runtime._fo._lang.Boolean;
 import net.folab.fo.runtime._fo._lang._Boolean._choose._0;
 
-public class choose<T extends Evaluable<T>> extends
-        Function<Evaluable<T>, Function<Evaluable<T>, Evaluable<T>>> {
+public class choose<T extends Evaluable<T>> extends Function<T, Function<T, T>> {
 
     private final Boolean self;
 
@@ -15,7 +14,7 @@ public class choose<T extends Evaluable<T>> extends
     }
 
     @Override
-    public Function<Evaluable<T>, Evaluable<T>> apply(Evaluable<T> trueValue) {
+    public _0<T> apply(Evaluable<T> trueValue) {
         return new _0<T>(this, trueValue);
     }
 

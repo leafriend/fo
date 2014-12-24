@@ -15,8 +15,7 @@ public class _ {
     public static final Evaluable<Integer> _c = _a._2B.apply(_b);
 
     // inc = 1 +
-    public static final Function<Evaluable<Integer>, Evaluable<Integer>> _inc = Integer
-            .valueOf(1)._2B;
+    public static final Function<Integer, Integer> _inc = Integer.valueOf(1)._2B;
 
     // d = 4
     public static final Integer _d = Integer.valueOf(4);
@@ -25,6 +24,7 @@ public class _ {
     public static final Evaluable<Integer> _e = _inc.apply(_d);
 
     // f = 10 < 7 = false
-    public static final Evaluable<Boolean> _f = Integer.valueOf(10)._3B.apply(Integer.valueOf(7));
+    public static final Evaluable<Boolean> _f = Integer.valueOf(10)._3B
+            .apply(Integer.valueOf(7));
 
 }
