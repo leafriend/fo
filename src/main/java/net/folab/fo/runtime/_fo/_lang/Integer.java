@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.folab.fo.runtime.Value;
 import net.folab.fo.runtime._fo._lang._Integer.add;
+import net.folab.fo.runtime._fo._lang._Integer.lessThan;
 
 public class Integer extends Value<Integer> {
 
@@ -13,6 +14,8 @@ public class Integer extends Value<Integer> {
     private final int value;
 
     public final add _2B = new add(this);
+
+    public final lessThan _3B = new lessThan(this);
 
     private Integer(int value) {
         this.value = value;
