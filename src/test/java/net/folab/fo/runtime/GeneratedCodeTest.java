@@ -27,6 +27,7 @@ public class GeneratedCodeTest {
         test("_d", "4");
         test("_e", "5");
         test("_f", "false");
+        test("_t", "true");
 
     }
 

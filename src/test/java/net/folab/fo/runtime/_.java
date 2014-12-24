@@ -27,4 +27,12 @@ public class _ {
     public static final Evaluable<Boolean> _f = Integer.valueOf(10)._3B
             .apply(Integer.valueOf(7));
 
+    // t = e < 6 = true
+    public static final Evaluable<Boolean> _t = _e.bind(
+            new Binding<Integer, Integer, Boolean>() {
+                public Function<Integer, Boolean> bind(Integer value) {
+                    return value._3B;
+                }
+            }).apply(Integer.valueOf(6));
+
 }
