@@ -4,7 +4,7 @@ import net.folab.fo.runtime.Evaluable;
 import net.folab.fo.runtime._fo._lang.Integer;
 import net.folab.fo.runtime._fo._lang._Integer.add;
 
-public class _0 implements Evaluable<Integer> {
+public class _0 extends Evaluable<Integer> {
 
     private final add self;
 

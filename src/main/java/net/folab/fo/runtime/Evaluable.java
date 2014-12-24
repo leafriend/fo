@@ -1,7 +1,7 @@
 package net.folab.fo.runtime;
 
-public interface Evaluable<T extends Evaluable<T>> {
+public abstract class Evaluable<T extends Evaluable<T>> {
 
-    public T evaluate();
+    public abstract T evaluate();
 
 }

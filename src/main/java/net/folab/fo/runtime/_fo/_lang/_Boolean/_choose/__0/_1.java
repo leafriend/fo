@@ -3,7 +3,7 @@ package net.folab.fo.runtime._fo._lang._Boolean._choose.__0;
 import net.folab.fo.runtime.Evaluable;
 import net.folab.fo.runtime._fo._lang._Boolean._choose._0;
 
-public class _1<T extends Evaluable<T>> implements Evaluable<T> {
+public class _1<T extends Evaluable<T>> extends Evaluable<T> {
 
     private final _0<T> _0;
 

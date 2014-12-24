@@ -5,7 +5,7 @@ import net.folab.fo.runtime._fo._lang.Boolean;
 import net.folab.fo.runtime._fo._lang.Integer;
 import net.folab.fo.runtime._fo._lang._Integer.lessThan;
 
-public class _0 implements Evaluable<Boolean> {
+public class _0 extends Evaluable<Boolean> {
 
     private final lessThan self;
 
