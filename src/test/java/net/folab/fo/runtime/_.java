@@ -42,4 +42,13 @@ public class _ {
                 }
             });
 
+    public static final Evaluable<Boolean> _nt = _t
+    //
+            .bind(new Binding<Boolean, Boolean>() {
+
+                public Evaluable<Boolean> bind(Boolean value) {
+                    return value.negate;
+                }
+            });
+
 }

@@ -31,6 +31,7 @@ public class GeneratedCodeTest {
         test("_e", Integer.valueOf(5));
         test("_f", Boolean.FALSE);
         test("_t", Boolean.TRUE);
+        test("_nt", Boolean.FALSE);
 
     }
 
