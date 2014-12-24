@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.lang.reflect.Field;
 
+import net.folab.fo.runtime._fo._lang.Boolean;
+import net.folab.fo.runtime._fo._lang.Integer;
+
 import org.junit.Test;
 import org.junit.Before;
 
@@ -21,21 +24,22 @@ public class GeneratedCodeTest {
     public void test() throws SecurityException, NoSuchFieldException,
             IllegalArgumentException, IllegalAccessException {
 
-        test("_a", "1");
-        test("_b", "2");
-        test("_c", "3");
-        test("_d", "4");
-        test("_e", "5");
-        test("_f", "false");
-        test("_t", "true");
+        test("_a", Integer.valueOf(1));
+        test("_b", Integer.valueOf(2));
+        test("_c", Integer.valueOf(3));
+        test("_d", Integer.valueOf(4));
+        test("_e", Integer.valueOf(5));
+        test("_f", Boolean.FALSE);
+        test("_t", Boolean.TRUE);
 
     }
 
-    public void test(String name, String string) throws NoSuchFieldException,
-            IllegalAccessException {
+    public <T extends Evaluable<T>> void test(String name, Evaluable<T> expected)
+            throws NoSuchFieldException, IllegalAccessException {
         Field field = genClass.getField(name);
-        Evaluable<?> value = (Evaluable<?>) field.get(null);
-        assertThat(value.evaluate().toString(), is(string));
+        @SuppressWarnings("unchecked")
+        Evaluable<T> value = (Evaluable<T>) field.get(null);
+        assertThat(value.evaluate(), is(expected));
     }
 
 }
