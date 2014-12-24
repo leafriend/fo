@@ -1,7 +1,7 @@
 package net.folab.fo.runtime;
 
-public interface Evaluable<Q extends Evaluable<?>> {
+public interface Evaluable<T extends Evaluable<T>> {
 
-    public Q evaluate();
+    public T evaluate();
 
 }
