@@ -28,11 +28,18 @@ public class _ {
             .apply(Integer.valueOf(7));
 
     // t = e < 6 = true
-    public static final Evaluable<Boolean> _t = _e.bind(
-            new Binding<Integer, Integer, Boolean>() {
+    public static final Evaluable<Boolean> _t = _e
+    //
+            .bind(new Binding<Integer, Function<Integer, Boolean>>() {
                 public Function<Integer, Boolean> bind(Integer value) {
                     return value._3B;
                 }
-            }).apply(Integer.valueOf(6));
+            })
+            //
+            .bind(new Binding<Function<Integer, Boolean>, Boolean>() {
+                public Evaluable<Boolean> bind(Function<Integer, Boolean> value) {
+                    return value.apply(Integer.valueOf(6));
+                }
+            });
 
 }

@@ -1,7 +1,7 @@
 package net.folab.fo.runtime;
 
-public interface Binding<V extends Evaluable<V>, P extends Evaluable<P>, R extends Evaluable<R>> {
+public interface Binding<V extends Evaluable<V>, M extends Evaluable<M>> {
 
-    public Function<P, R> bind(V value);
+    public Evaluable<M> bind(V value);
 
 }
