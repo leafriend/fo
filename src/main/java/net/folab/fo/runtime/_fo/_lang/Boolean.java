@@ -24,4 +24,9 @@ public class Boolean extends Value<Boolean> {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
 }
