@@ -1,5 +1,6 @@
 package net.folab.fo.runtime;
 
+import net.folab.fo.runtime._fo._lang.Boolean;
 import net.folab.fo.runtime._fo._lang.Integer;
 
 public class _ {
@@ -22,5 +23,8 @@ public class _ {
 
     // e = inc d # = 1 + 4 = 5
     public static final Evaluable<Integer> _e = _inc.apply(_d);
+
+    // f = 10 < 7 = false
+    public static final Evaluable<Boolean> _f = Integer.valueOf(10)._3B.apply(Integer.valueOf(7));
 
 }
