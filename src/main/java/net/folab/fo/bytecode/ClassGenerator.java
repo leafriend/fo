@@ -1,5 +1,8 @@
 package net.folab.fo.bytecode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -15,6 +18,8 @@ public class ClassGenerator {
     private JavaType superClass = new JavaType("java/lang/Object");
 
     private JavaType[] interfaces = new JavaType[0];
+
+    private List<MethodGenerator> methodGenerators = new ArrayList<MethodGenerator>();
 
     public byte[] generateBytecode() {
 
@@ -45,6 +50,10 @@ public class ClassGenerator {
             mv.visitInsn(Opcodes.RETURN);
             mv.visitMaxs(1, 1);
             mv.visitEnd();
+        }
+
+        for (MethodGenerator mg : methodGenerators) {
+            mg.generate(cw);
         }
 
         cw.visitEnd();
@@ -96,6 +105,12 @@ public class ClassGenerator {
     public ClassGenerator setInterfaces(JavaType... interfaces) {
         this.interfaces = interfaces;
         return this;
+    }
+
+    public MethodGenerator addMethod() {
+        MethodGenerator mg = new MethodGenerator(this);
+        methodGenerators.add(mg);
+        return mg;
     }
 
 }
