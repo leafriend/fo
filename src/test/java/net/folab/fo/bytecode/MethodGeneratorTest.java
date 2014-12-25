@@ -29,7 +29,9 @@ public class MethodGeneratorTest {
     }
 
     @Test
-    public void testSetName() throws SecurityException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void testSetName() throws SecurityException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
         Class<?> generatedClass;
         Method method;
 
@@ -42,6 +44,165 @@ public class MethodGeneratorTest {
         method = generatedClass.getDeclaredMethod("bar");
         assertThat(method, is(not(nullValue())));
         assertThat(method.getReturnType(), typeCompatibleWith(void.class));
+
+    }
+
+    @Test
+    public void testSetReturnType_void() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.VOID);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(void.class));
+
+    }
+
+    @Test
+    public void testSetReturnType_boolean() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.BOOLEAN);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(boolean.class));
+
+        boolean b = (Boolean) method.invoke(generatedClass.newInstance());
+        assertThat(b, is(false));
+
+    }
+
+    @Test
+    public void testSetReturnType_byte() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.BYTE);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(byte.class));
+
+        byte b = (Byte) method.invoke(generatedClass.newInstance());
+        assertThat(b, is((byte) 0));
+
+    }
+
+    @Test
+    public void testSetReturnType_char() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.CHAR);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(char.class));
+
+        char c = (Character) method.invoke(generatedClass.newInstance());
+        assertThat(c, is((char) 0));
+
+    }
+
+    @Test
+    public void testSetReturnType_short() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.SHORT);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(short.class));
+
+        short S = (Short) method.invoke(generatedClass.newInstance());
+        assertThat(S, is((short) 0));
+
+    }
+
+    @Test
+    public void testSetReturnType_int() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.INT);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(int.class));
+
+        int i = (Integer) method.invoke(generatedClass.newInstance());
+        assertThat(i, is(0));
+
+    }
+
+    @Test
+    public void testSetReturnType_long() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.LONG);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(long.class));
+
+        long l = (Long) method.invoke(generatedClass.newInstance());
+        assertThat(l, is(0l));
+
+    }
+
+    @Test
+    public void testSetReturnType_float() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.FLOAT);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(float.class));
+
+        float f = (Float) method.invoke(generatedClass.newInstance());
+        assertThat(f, is(0.0f));
+
+    }
+
+    @Test
+    public void testSetReturnType_double() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        mg.setName("bar").setReturnType(JavaType.DOUBLE);
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(double.class));
+
+        double d = (Double) method.invoke(generatedClass.newInstance());
+        assertThat(d, is(0.0d));
 
     }
 
