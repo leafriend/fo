@@ -28,8 +28,9 @@ public class MethodGenerator implements Opcodes {
         desc += ")";
         desc += returnType.getDescName();
 
+        int modifier = accessModifier.modifier;
         MethodVisitor mv = cw.visitMethod(//
-                accessModifier.modifier, // access
+                modifier, // access
                 name, // name
                 desc, // desc
                 null, // signature
@@ -38,38 +39,43 @@ public class MethodGenerator implements Opcodes {
 
         mv.visitCode();
 
+        int maxStack = 0;
+        int maxLocals = 0;
+
+        if ((modifier & ACC_STATIC) != ACC_STATIC)
+            maxLocals++; // local variable for `this`
+
         if (returnType.equals(JavaType.VOID)) {
             mv.visitInsn(RETURN);
-        } else if (returnType.equals(JavaType.BOOLEAN)) {
-            mv.visitInsn(ICONST_0);
-            mv.visitInsn(IRETURN);
-        } else if (returnType.equals(JavaType.BYTE)) {
-            mv.visitInsn(ICONST_0);
-            mv.visitInsn(IRETURN);
-        } else if (returnType.equals(JavaType.CHAR)) {
-            mv.visitInsn(ICONST_0);
-            mv.visitInsn(IRETURN);
-        } else if (returnType.equals(JavaType.SHORT)) {
-            mv.visitInsn(ICONST_0);
-            mv.visitInsn(IRETURN);
-        } else if (returnType.equals(JavaType.INT)) {
+        } else if (returnType.equals(JavaType.BOOLEAN)
+                || returnType.equals(JavaType.BYTE)
+                || returnType.equals(JavaType.CHAR)
+                || returnType.equals(JavaType.SHORT)
+                || returnType.equals(JavaType.INT)) {
+            maxStack++;
             mv.visitInsn(ICONST_0);
             mv.visitInsn(IRETURN);
         } else if (returnType.equals(JavaType.LONG)) {
+            maxStack++;
+            maxStack++;
             mv.visitInsn(LCONST_0);
             mv.visitInsn(LRETURN);
         } else if (returnType.equals(JavaType.FLOAT)) {
+            maxStack++;
             mv.visitInsn(FCONST_0);
             mv.visitInsn(FRETURN);
         } else if (returnType.equals(JavaType.DOUBLE)) {
+            maxStack++;
+            maxStack++;
             mv.visitInsn(DCONST_0);
             mv.visitInsn(DRETURN);
         } else {
+            maxStack++;
             mv.visitInsn(ACONST_NULL);
             mv.visitInsn(ARETURN);
         }
 
-        mv.visitMaxs(1, 1);
+        mv.visitMaxs(maxStack, maxLocals);
         mv.visitEnd();
 
     }
