@@ -4,8 +4,9 @@ import static net.folab.fo.runtime._fo._lang.Boolean.*;
 import static net.folab.fo.runtime._fo._lang.Integer.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-
-import net.folab.fo.runtime._fo._lang._Boolean.choose;
+import net.folab.fo.runtime.Evaluable;
+import net.folab.fo.runtime.Function;
+import net.folab.fo.runtime.FunctionBinding;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,25 +25,58 @@ public class BooleanTest {
     @Test
     public void test_Boolean() {
 
-        choose<Boolean> f = FALSE.choose();
-        choose<Boolean> t = TRUE.choose();
+        Evaluable<Function<Boolean, Function<Boolean, Boolean>>> f = FALSE
+                .choose();
+        Evaluable<Function<Boolean, Function<Boolean, Boolean>>> t = TRUE
+                .choose();
 
-        assertTrue(f.apply(FALSE).apply(TRUE).evaluate().getValue());
-        assertFalse(t.apply(FALSE).apply(TRUE).evaluate().getValue());
+        // false.choose
+        // ->
+        // FALSE.choose()
+
+        // false.choose false
+        // ->
+        // FALSE.choose()
+        // .bind(new FunctionBinding(FALSE))
+
+        // false.choose false true
+        // ->
+        // FALSE.choose()
+        // .bind(new FunctionBinding(FALSE))
+        // .bind(new FunctionBinding(TRUE))
+
+        assertTrue(f
+                .bind(new FunctionBinding<Boolean, Function<Boolean, Boolean>>(
+                        FALSE))
+                .bind(new FunctionBinding<Boolean, Boolean>(TRUE)).evaluate()
+                .getValue());
+        assertFalse(t
+                .bind(new FunctionBinding<Boolean, Function<Boolean, Boolean>>(
+                        FALSE))
+                .bind(new FunctionBinding<Boolean, Boolean>(TRUE)).evaluate()
+                .getValue());
 
     }
 
     @Test
     public void test_Integer() {
 
-        choose<Integer> f = FALSE.choose();
-        choose<Integer> t = TRUE.choose();
+        Evaluable<Integer> actual;
 
-        Integer one = valueOf(1);
-        Integer zero = valueOf(0);
+        Function<Integer, Function<Integer, Integer>> f = FALSE.choose();
+        Function<Integer, Function<Integer, Integer>> t = TRUE.choose();
 
-        assertThat(f.apply(one).apply(zero).evaluate().getValue(), is(0));
-        assertThat(t.apply(one).apply(zero).evaluate().getValue(), is(1));
+        actual = f.bind(
+                new FunctionBinding<Integer, Function<Integer, Integer>>(
+                        valueOf(1))).bind(
+                new FunctionBinding<Integer, Integer>(valueOf(0)));
+        assertThat(actual.evaluate().getValue(), is(0));
+
+        actual = t.bind(
+                new FunctionBinding<Integer, Function<Integer, Integer>>(
+                        valueOf(1))).bind(
+                new FunctionBinding<Integer, Integer>(valueOf(0)));
+        assertThat(actual.evaluate().getValue(), is(1));
 
     }
 

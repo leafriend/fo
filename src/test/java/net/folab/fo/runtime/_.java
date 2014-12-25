@@ -36,18 +36,14 @@ public class _ {
                 }
             })
             //
-            .bind(new Binding<Function<Integer, Boolean>, Boolean>() {
-                public Evaluable<Boolean> bind(Function<Integer, Boolean> value) {
-                    return value.apply(Integer.valueOf(6));
-                }
-            });
+            .bind(new FunctionBinding<Integer, Boolean>(Integer.valueOf(6)));
 
     public static final Evaluable<Boolean> _nt = _t
     //
             .bind(new Binding<Boolean, Boolean>() {
 
                 public Evaluable<Boolean> bind(Boolean value) {
-                    return value.negate;
+                    return value.negate();
                 }
             });
 
