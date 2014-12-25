@@ -18,11 +18,13 @@ public class ClassGeneratorTest {
     }
 
     @Test
-    public void testSetName() {
+    public void testSetName() throws InstantiationException, IllegalAccessException {
 
         Class<?> generatedClass;
         byte[] bytecode;
         String name;
+
+        Object obj;
 
         // - - -
 
@@ -33,8 +35,10 @@ public class ClassGeneratorTest {
                 .generateBytecode();
 
         generatedClass = defineClass(name, bytecode);
-
         assertThat(generatedClass.getName(), is(name));
+
+        obj = generatedClass.newInstance();
+        assertThat(obj, is(not(nullValue())));
 
         // - - -
 
@@ -47,6 +51,9 @@ public class ClassGeneratorTest {
         generatedClass = defineClass(name, bytecode);
 
         assertThat(generatedClass.getName(), is(name));
+
+        obj = generatedClass.newInstance();
+        assertThat(obj, is(not(nullValue())));
 
     }
 
