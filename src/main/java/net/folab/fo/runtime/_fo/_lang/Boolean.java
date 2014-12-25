@@ -20,6 +20,10 @@ public class Boolean extends Value<Boolean> {
 
     public final negate negate = new negate(this);
 
+    public negate negate() {
+        return negate;
+    }
+
     private Boolean(boolean value) {
         this.value = value;
     }
