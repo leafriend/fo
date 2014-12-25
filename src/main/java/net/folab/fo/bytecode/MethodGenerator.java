@@ -84,32 +84,36 @@ public class MethodGenerator implements Opcodes {
         return accessModifier;
     }
 
-    public void setAccessModifier(AccessModifier accessModifier) {
+    public MethodGenerator setAccessModifier(AccessModifier accessModifier) {
         this.accessModifier = accessModifier;
+        return this;
     }
 
     public JavaType getReturnType() {
         return returnType;
     }
 
-    public void setReturnType(JavaType returnType) {
+    public MethodGenerator setReturnType(JavaType returnType) {
         this.returnType = returnType;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public MethodGenerator setName(String name) {
         this.name = name;
+        return this;
     }
 
     public JavaType[] getParameterTypes() {
         return parameterTypes;
     }
 
-    public void setParameterTypes(JavaType[] parameterTypes) {
+    public MethodGenerator setParameterTypes(JavaType[] parameterTypes) {
         this.parameterTypes = parameterTypes;
+        return this;
     }
 
 }
