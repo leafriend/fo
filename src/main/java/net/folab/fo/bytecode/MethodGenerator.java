@@ -39,43 +39,53 @@ public class MethodGenerator implements Opcodes {
 
         mv.visitCode();
 
-        int maxStack = 0;
-        int maxLocals = 0;
+        Counter maxStack = new Counter();
+        Counter maxLocals = new Counter();
 
         if ((modifier & ACC_STATIC) != ACC_STATIC)
-            maxLocals++; // local variable for `this`
+            maxLocals.inc(); // local variable for `this`
 
         if (returnType.equals(JavaType.VOID)) {
             mv.visitInsn(RETURN);
+            maxStack.clear();
+
         } else if (returnType.equals(JavaType.BOOLEAN)
                 || returnType.equals(JavaType.BYTE)
                 || returnType.equals(JavaType.CHAR)
                 || returnType.equals(JavaType.SHORT)
                 || returnType.equals(JavaType.INT)) {
-            maxStack++;
+            maxStack.inc();
             mv.visitInsn(ICONST_0);
             mv.visitInsn(IRETURN);
+            maxStack.clear();
+
         } else if (returnType.equals(JavaType.LONG)) {
-            maxStack++;
-            maxStack++;
+            maxStack.inc().inc();
             mv.visitInsn(LCONST_0);
             mv.visitInsn(LRETURN);
+            maxStack.clear();
+
         } else if (returnType.equals(JavaType.FLOAT)) {
-            maxStack++;
+            maxStack.inc();
             mv.visitInsn(FCONST_0);
             mv.visitInsn(FRETURN);
+            maxStack.clear();
+
         } else if (returnType.equals(JavaType.DOUBLE)) {
-            maxStack++;
-            maxStack++;
+            maxStack.inc().inc();
             mv.visitInsn(DCONST_0);
             mv.visitInsn(DRETURN);
+            maxStack.clear();
+
         } else {
-            maxStack++;
+            maxStack.inc();
             mv.visitInsn(ACONST_NULL);
             mv.visitInsn(ARETURN);
+            maxStack.clear();
+
         }
 
-        mv.visitMaxs(maxStack, maxLocals);
+        mv.visitMaxs(maxStack.max(), maxLocals.max());
         mv.visitEnd();
 
     }
