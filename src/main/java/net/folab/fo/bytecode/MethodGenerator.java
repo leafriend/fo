@@ -121,7 +121,7 @@ public class MethodGenerator implements Opcodes {
         return parameterTypes;
     }
 
-    public MethodGenerator setParameterTypes(JavaType[] parameterTypes) {
+    public MethodGenerator setParameterTypes(JavaType... parameterTypes) {
         this.parameterTypes = parameterTypes;
         return this;
     }
