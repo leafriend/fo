@@ -21,9 +21,9 @@ public class GeneratedCodeTest {
     }
 
     @Test
-    public void test__() throws SecurityException, NoSuchFieldException,
+    public void testToBeCompared() throws SecurityException, NoSuchFieldException,
             IllegalArgumentException, IllegalAccessException, ClassNotFoundException {
-        setup("net.folab.fo.runtime._");
+        setup("net.folab.fo.runtime.ToBeCompared");
         test();
     }
 

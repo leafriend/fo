@@ -3,7 +3,7 @@ package net.folab.fo.runtime;
 import net.folab.fo.runtime._fo._lang.Boolean;
 import net.folab.fo.runtime._fo._lang.Integer;
 
-public class _ {
+public class ToBeCompared {
 
     // a = 1
     public static final Integer _a = Integer.valueOf(1);
