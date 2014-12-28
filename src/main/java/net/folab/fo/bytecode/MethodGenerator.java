@@ -61,7 +61,7 @@ public class MethodGenerator extends Block implements Opcodes {
 
         StatementContext ctx = new StatementContext();
 
-        if (isStatic) {
+        if (!isStatic) {
             ctx.addLocal("this", new JavaType(cg.getName()));
         }
 
