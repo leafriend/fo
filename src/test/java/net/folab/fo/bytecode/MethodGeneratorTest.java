@@ -240,7 +240,7 @@ public class MethodGeneratorTest {
 
         cg.addMethod( //
         MethodGenerator.build("bar") //
-                .setReturnType(new JavaType("java/lang/Object")) //
+                .setReturnType(JavaType.OBJECT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.nullValue())) //
         );

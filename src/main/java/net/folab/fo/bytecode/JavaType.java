@@ -35,6 +35,10 @@ public class JavaType implements Opcodes {
     public static final JavaType DOUBLE = new JavaType(true, 2, DRETURN, DLOAD,
             "double");
 
+    public static final JavaType OBJECT = new JavaType("java/lang/Object");
+
+    public static final JavaType STRING = new JavaType("java/lang/String");
+
     private final boolean isPrimitive;
 
     private final int size;

@@ -17,7 +17,7 @@ public class ClassGenerator {
 
     private String name;
 
-    private JavaType superClass = new JavaType("java/lang/Object");
+    private JavaType superClass = JavaType.OBJECT;
 
     private JavaType[] interfaces = new JavaType[0];
 
