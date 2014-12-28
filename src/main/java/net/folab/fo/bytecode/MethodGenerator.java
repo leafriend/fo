@@ -13,18 +13,30 @@ public class MethodGenerator implements Opcodes {
 
     private final ClassGenerator cg;
 
-    private Access access = Access.PUBLIC;
+    private final Access access;
 
-    private JavaType returnType = JavaType.VOID;
+    private final JavaType returnType;
 
-    private String name;
+    private final String name;
 
-    private JavaType[] parameterTypes = new JavaType[0];
+    private final JavaType[] parameterTypes;
 
-    private List<Statement> statements = new ArrayList<Statement>();
+    private final List<Statement> statements;
 
-    protected MethodGenerator(ClassGenerator cg) {
+    public MethodGenerator(ClassGenerator cg, Access access,
+            JavaType returnType, String name, JavaType[] parameterTypes,
+            List<Statement> statements) {
         this.cg = cg;
+        this.access = access;
+        this.returnType = returnType;
+        this.name = name;
+        this.parameterTypes = parameterTypes;
+        this.statements = statements;
+    }
+
+    public static MethodGenerator build(String name) {
+        return new MethodGenerator(null, Access.PUBLIC, JavaType.VOID, name,
+                new JavaType[0], new ArrayList<Statement>());
     }
 
     public void generate(ClassWriter cw) {
@@ -61,13 +73,18 @@ public class MethodGenerator implements Opcodes {
 
     }
 
+    public MethodGenerator setClassGenerator(ClassGenerator cg) {
+        return new MethodGenerator(cg, access, returnType, name,
+                parameterTypes, statements);
+    }
+
     public Access getAccessModifier() {
         return access;
     }
 
     public MethodGenerator setAccessModifier(Access accessModifier) {
-        this.access = accessModifier;
-        return this;
+        return new MethodGenerator(cg, accessModifier, returnType, name,
+                parameterTypes, statements);
     }
 
     public JavaType getReturnType() {
@@ -75,17 +92,12 @@ public class MethodGenerator implements Opcodes {
     }
 
     public MethodGenerator setReturnType(JavaType returnType) {
-        this.returnType = returnType;
-        return this;
+        return new MethodGenerator(cg, access, returnType, name,
+                parameterTypes, statements);
     }
 
     public String getName() {
         return name;
-    }
-
-    public MethodGenerator setName(String name) {
-        this.name = name;
-        return this;
     }
 
     public JavaType[] getParameterTypes() {
@@ -93,8 +105,8 @@ public class MethodGenerator implements Opcodes {
     }
 
     public MethodGenerator setParameterTypes(JavaType... parameterTypes) {
-        this.parameterTypes = parameterTypes;
-        return this;
+        return new MethodGenerator(cg, access, returnType, name,
+                parameterTypes, statements);
     }
 
     public MethodGenerator addStatement(Statement statement) {

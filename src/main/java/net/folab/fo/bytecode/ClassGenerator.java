@@ -41,8 +41,7 @@ public class ClassGenerator {
         );
 
         // TODO detect constructor of super class
-        new MethodGenerator(this) //
-                .setName("<init>") //
+        MethodGenerator.build("<init>") //
                 .setParameterTypes() //
                 .setReturnType(JavaType.VOID) //
                 .addStatement( //
@@ -53,6 +52,7 @@ public class ClassGenerator {
                         ) //
                 ) //
                 .addStatement(Return.VOID) //
+                .setClassGenerator(this) //
                 .generate(cw);
 
         for (MethodGenerator mg : methodGenerators) {
@@ -110,10 +110,9 @@ public class ClassGenerator {
         return this;
     }
 
-    public MethodGenerator addMethod() {
-        MethodGenerator mg = new MethodGenerator(this);
-        methodGenerators.add(mg);
-        return mg;
+    public ClassGenerator addMethod(MethodGenerator mg) {
+        methodGenerators.add(mg.setClassGenerator(this));
+        return this;
     }
 
 }

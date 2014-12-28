@@ -19,12 +19,9 @@ public class MethodGeneratorTest {
 
     private ClassGenerator cg;
 
-    private MethodGenerator mg;
-
     @Before
     public void setUp() throws Exception {
         cg = new ClassGenerator().setName(CLASS_NAME);
-        mg = cg.addMethod();
     }
 
     @After
@@ -37,10 +34,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.VOID) //
                 .setParameterTypes() //
-                .addStatement(Return.VOID);
+                .addStatement(Return.VOID) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -55,10 +54,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of(false)));
+                .addStatement(new Return(Literal.of(false))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -76,10 +77,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of((byte) 0)));
+                .addStatement(new Return(Literal.of((byte) 0))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -97,10 +100,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of((char) 0)));
+                .addStatement(new Return(Literal.of((char) 0))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -118,10 +123,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of((short) 0)));
+                .addStatement(new Return(Literal.of((short) 0))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -139,10 +146,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of(0)));
+                .addStatement(new Return(Literal.of(0))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -160,10 +169,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of(0l)));
+                .addStatement(new Return(Literal.of(0l))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -181,10 +192,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of(0.0f)));
+                .addStatement(new Return(Literal.of(0.0f))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -202,10 +215,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.of(0.0)));
+                .addStatement(new Return(Literal.of(0.0))) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -223,10 +238,12 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        mg.setName("bar") //
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
                 .setReturnType(new JavaType("java/lang/Object")) //
                 .setParameterTypes() //
-                .addStatement(new Return(Literal.nullValue()));
+                .addStatement(new Return(Literal.nullValue())) //
+        );
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
