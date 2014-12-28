@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class JavaType {
 
+    public static final JavaType NULL = new JavaType(false, 1, "null");
+
     public static final JavaType VOID = new JavaType(true, 0, "void");
 
     public static final JavaType BOOLEAN = new JavaType(true, 1, "boolean");
