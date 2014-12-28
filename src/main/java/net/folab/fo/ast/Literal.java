@@ -49,6 +49,10 @@ public class Literal implements Expression {
         return new Literal(Double.valueOf(value), JavaType.DOUBLE);
     }
 
+    public static Literal of(String value) {
+        return new Literal(value, JavaType.STRING);
+    }
+
     public static Literal nullValue() {
         return new Literal(null, JavaType.NULL) {
             @Override

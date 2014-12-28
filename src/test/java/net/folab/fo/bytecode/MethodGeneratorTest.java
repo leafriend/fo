@@ -255,6 +255,29 @@ public class MethodGeneratorTest {
 
     }
 
+    @Test
+    public void testSetReturnType_String() throws SecurityException,
+            NoSuchMethodException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
+
+        cg.addMethod( //
+        MethodGenerator.build("bar") //
+                .setReturnType(JavaType.STRING) //
+                .setParameterTypes() //
+                .addStatement(new Return(Literal.of("baz"))) //
+        );
+
+        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Method method = generatedClass.getDeclaredMethod("bar");
+
+        assertThat(method.getReturnType(), typeCompatibleWith(String.class));
+
+        String s = (String) method.invoke(generatedClass.newInstance());
+        assertThat(s, is("baz"));
+
+    }
+
     public static Class<?> defineClass(String name, byte[] bytecode) {
         return new ByteArrayClassLoader().defineClass(name, bytecode);
     }
