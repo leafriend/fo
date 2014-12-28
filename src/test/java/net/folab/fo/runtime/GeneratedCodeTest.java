@@ -9,18 +9,24 @@ import net.folab.fo.runtime._fo._lang.Boolean;
 import net.folab.fo.runtime._fo._lang.Integer;
 
 import org.junit.Test;
-import org.junit.Before;
 
 public class GeneratedCodeTest {
 
     private Class<?> genClass;
 
-    @Before
-    public void setUp() throws ClassNotFoundException {
-        genClass = Class.forName("net.folab.fo.runtime._");
+    public void setup(String className) throws ClassNotFoundException {
+        ClassLoader classLoader = new ClassLoader(getClass().getClassLoader()) {
+        };
+        genClass = classLoader.loadClass(className);
     }
 
     @Test
+    public void test__() throws SecurityException, NoSuchFieldException,
+            IllegalArgumentException, IllegalAccessException, ClassNotFoundException {
+        setup("net.folab.fo.runtime._");
+        test();
+    }
+
     public void test() throws SecurityException, NoSuchFieldException,
             IllegalArgumentException, IllegalAccessException {
 
