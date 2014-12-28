@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import net.folab.fo.ast.JavaValue;
+import net.folab.fo.ast.Literal;
 import net.folab.fo.ast.Return;
 
 import org.junit.After;
@@ -58,7 +58,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of(false)));
+                .addStatement(new Return(Literal.of(false)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -79,7 +79,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of((byte) 0)));
+                .addStatement(new Return(Literal.of((byte) 0)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -100,7 +100,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of((char) 0)));
+                .addStatement(new Return(Literal.of((char) 0)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -121,7 +121,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of((short) 0)));
+                .addStatement(new Return(Literal.of((short) 0)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -142,7 +142,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of(0)));
+                .addStatement(new Return(Literal.of(0)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -163,7 +163,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of(0l)));
+                .addStatement(new Return(Literal.of(0l)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -184,7 +184,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of(0.0f)));
+                .addStatement(new Return(Literal.of(0.0f)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -205,7 +205,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.of(0.0)));
+                .addStatement(new Return(Literal.of(0.0)));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -226,7 +226,7 @@ public class MethodGeneratorTest {
         mg.setName("bar") //
                 .setReturnType(new JavaType("java/lang/Object")) //
                 .setParameterTypes() //
-                .addStatement(new Return(JavaValue.nullValue()));
+                .addStatement(new Return(Literal.nullValue()));
 
         Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
         Method method = generatedClass.getDeclaredMethod("bar");
