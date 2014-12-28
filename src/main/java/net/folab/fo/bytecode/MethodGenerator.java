@@ -1,6 +1,7 @@
 package net.folab.fo.bytecode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.folab.fo.ast.Statement;
@@ -31,7 +32,7 @@ public class MethodGenerator implements Opcodes {
         this.returnType = returnType;
         this.name = name;
         this.parameterTypes = parameterTypes;
-        this.statements = statements;
+        this.statements = Collections.unmodifiableList(statements);
     }
 
     public static MethodGenerator build(String name) {
@@ -110,8 +111,10 @@ public class MethodGenerator implements Opcodes {
     }
 
     public MethodGenerator addStatement(Statement statement) {
+        List<Statement> statements = new ArrayList<Statement>(this.statements);
         statements.add(statement);
-        return this;
+        return new MethodGenerator(cg, access, returnType, name,
+                parameterTypes, statements);
     }
 
 }
