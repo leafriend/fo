@@ -56,46 +56,6 @@ public class MethodGenerator implements Opcodes {
             statement.generate(mv, ctx);
         }
 
-//        if (returnType.equals(JavaType.VOID)) {
-//            mv.visitInsn(RETURN);
-//            ctx.clearStack();
-//
-//        } else if (returnType.equals(JavaType.BOOLEAN)
-//                || returnType.equals(JavaType.BYTE)
-//                || returnType.equals(JavaType.CHAR)
-//                || returnType.equals(JavaType.SHORT)
-//                || returnType.equals(JavaType.INT)) {
-//            ctx.incStack();
-//            mv.visitInsn(ICONST_0);
-//            mv.visitInsn(IRETURN);
-//            ctx.clearStack();
-//
-//        } else if (returnType.equals(JavaType.LONG)) {
-//            ctx.incStack().incStack();
-//            mv.visitInsn(LCONST_0);
-//            mv.visitInsn(LRETURN);
-//            ctx.clearStack();
-//
-//        } else if (returnType.equals(JavaType.FLOAT)) {
-//            ctx.incStack();
-//            mv.visitInsn(FCONST_0);
-//            mv.visitInsn(FRETURN);
-//            ctx.clearStack();
-//
-//        } else if (returnType.equals(JavaType.DOUBLE)) {
-//            ctx.incStack().incStack();
-//            mv.visitInsn(DCONST_0);
-//            mv.visitInsn(DRETURN);
-//            ctx.clearStack();
-//
-//        } else {
-//            ctx.incStack();
-//            mv.visitInsn(ACONST_NULL);
-//            mv.visitInsn(ARETURN);
-//            ctx.clearStack();
-//
-//        }
-
         mv.visitMaxs(ctx.maxStack(), ctx.maxLocals());
         mv.visitEnd();
 
