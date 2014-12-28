@@ -1,4 +1,4 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import net.folab.fo.bytecode.StatementContext;
 

@@ -3,8 +3,8 @@ package net.folab.fo.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.folab.fo.ast.Block;
-import net.folab.fo.ast.Statement;
+import net.folab.fo.jast.Block;
+import net.folab.fo.jast.Statement;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

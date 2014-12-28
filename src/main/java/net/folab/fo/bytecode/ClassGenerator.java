@@ -3,9 +3,9 @@ package net.folab.fo.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.folab.fo.ast.ConstructorInvocation;
-import net.folab.fo.ast.LocalVariable;
-import net.folab.fo.ast.Return;
+import net.folab.fo.jast.ConstructorInvocation;
+import net.folab.fo.jast.LocalVariable;
+import net.folab.fo.jast.Return;
 
 import org.objectweb.asm.ClassWriter;
 

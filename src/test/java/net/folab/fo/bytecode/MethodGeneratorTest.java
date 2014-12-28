@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import net.folab.fo.ast.Literal;
-import net.folab.fo.ast.Return;
+import net.folab.fo.jast.Literal;
+import net.folab.fo.jast.Return;
 
 import org.junit.After;
 import org.junit.Before;

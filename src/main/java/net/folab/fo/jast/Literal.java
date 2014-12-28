@@ -1,4 +1,4 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
