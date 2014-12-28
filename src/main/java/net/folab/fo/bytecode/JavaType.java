@@ -2,27 +2,29 @@ package net.folab.fo.bytecode;
 
 import java.util.Arrays;
 
-public class JavaType {
+import org.objectweb.asm.Opcodes;
 
-    public static final JavaType NULL = new JavaType(false, 1, "null");
+public class JavaType implements Opcodes {
 
-    public static final JavaType VOID = new JavaType(true, 0, "void");
+    public static final JavaType NULL = new JavaType(false, 1, ARETURN, "null");
 
-    public static final JavaType BOOLEAN = new JavaType(true, 1, "boolean");
+    public static final JavaType VOID = new JavaType(true, 0, RETURN, "void");
 
-    public static final JavaType BYTE = new JavaType(true, 1, "byte");
+    public static final JavaType BOOLEAN = new JavaType(true, 1, IRETURN, "boolean");
 
-    public static final JavaType CHAR = new JavaType(true, 1, "char");
+    public static final JavaType BYTE = new JavaType(true, 1, IRETURN, "byte");
 
-    public static final JavaType SHORT = new JavaType(true, 1, "short");
+    public static final JavaType CHAR = new JavaType(true, 1, IRETURN, "char");
 
-    public static final JavaType INT = new JavaType(true, 1, "int");
+    public static final JavaType SHORT = new JavaType(true, 1, IRETURN, "short");
 
-    public static final JavaType LONG = new JavaType(true, 2, "long");
+    public static final JavaType INT = new JavaType(true, 1, IRETURN, "int");
 
-    public static final JavaType FLOAT = new JavaType(true, 1, "float");
+    public static final JavaType LONG = new JavaType(true, 2, LRETURN, "long");
 
-    public static final JavaType DOUBLE = new JavaType(true, 2, "double");
+    public static final JavaType FLOAT = new JavaType(true, 1, FRETURN, "float");
+
+    public static final JavaType DOUBLE = new JavaType(true, 2, DRETURN, "double");
 
     private final boolean isPrimitive;
 
@@ -32,18 +34,22 @@ public class JavaType {
 
     private final JavaType[] typeParameters;
 
+    public final int returnOpcode;
+
     public JavaType(String name, JavaType... typeParameters) {
         this.isPrimitive = false;
         this.size = 1;
         this.name = name;
         this.typeParameters = typeParameters;
+        this.returnOpcode = Opcodes.ARETURN;
     }
 
-    private JavaType(boolean isPrimitive, int size, String name, JavaType... typeParameters) {
+    private JavaType(boolean isPrimitive, int size, int returnOpcode, String name, JavaType... typeParameters) {
         this.isPrimitive = isPrimitive;
         this.size = size;
         this.name = name;
         this.typeParameters = typeParameters;
+        this.returnOpcode = returnOpcode;
     }
 
     public boolean isPrimitive() {
