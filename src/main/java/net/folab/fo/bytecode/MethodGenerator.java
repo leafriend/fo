@@ -49,7 +49,7 @@ public class MethodGenerator implements Opcodes {
         StatementContext ctx = new StatementContext();
 
         if ((modifier & ACC_STATIC) != ACC_STATIC) {
-            ctx.addLocal("this");
+            ctx.addLocal("this", new JavaType(cg.getName()));
         }
 
         for (Statement statement : statements) {

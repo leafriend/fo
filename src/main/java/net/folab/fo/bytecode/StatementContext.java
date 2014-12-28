@@ -11,6 +11,8 @@ public class StatementContext {
 
     private final List<String> localNames = new ArrayList<String>();
 
+    private final List<JavaType> localTypes = new ArrayList<JavaType>();
+
     public StatementContext incStack() {
         statckCounter.inc();
         return this;
@@ -30,14 +32,19 @@ public class StatementContext {
         return statckCounter.max();
     }
 
-    public StatementContext addLocal(String name) {
+    public StatementContext addLocal(String name, JavaType type) {
         localCoutner.inc();
         localNames.add(name);
+        localTypes.add(type);
         return this;
     }
 
     public int indexOfLocal(String name) {
         return localNames.indexOf(name);
+    }
+
+    public JavaType typeOfLocal(String name) {
+        return localTypes.get(localNames.indexOf(name));
     }
 
     public int maxLocals() {

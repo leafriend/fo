@@ -36,7 +36,7 @@ public class StatementContextTest {
     @Test
     public void testLocals() {
         assertThat(ctx.maxLocals(), is(0));
-        ctx.addLocal("foo");
+        ctx.addLocal("foo", JavaType.INT);
         assertThat(ctx.indexOfLocal("foo"), is(0));
         assertThat(ctx.maxLocals(), is(1));
     }
