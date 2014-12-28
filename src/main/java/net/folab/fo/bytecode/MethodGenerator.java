@@ -3,10 +3,10 @@ package net.folab.fo.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.folab.fo.ast.Statement;
 import net.folab.fo.ast.Block;
+import net.folab.fo.ast.Statement;
 
-import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -38,7 +38,7 @@ public class MethodGenerator extends Block implements Opcodes {
                 new JavaType[0], false, new ArrayList<Statement>());
     }
 
-    public void generate(ClassWriter cw) {
+    public void generate(ClassVisitor cv) {
         String desc = "(";
         for (JavaType pt : parameterTypes) {
             desc += pt.getDescName();
@@ -49,7 +49,7 @@ public class MethodGenerator extends Block implements Opcodes {
         int modifier = access.modifier;
         if (isStatic)
             modifier += ACC_STATIC;
-        MethodVisitor mv = cw.visitMethod(//
+        MethodVisitor mv = cv.visitMethod(//
                 modifier, // access
                 name, // name
                 desc, // desc
