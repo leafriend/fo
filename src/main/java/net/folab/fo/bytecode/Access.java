@@ -2,7 +2,7 @@ package net.folab.fo.bytecode;
 
 import org.objectweb.asm.Opcodes;
 
-public enum AccessModifier {
+public enum Access {
 
     PUBLIC(Opcodes.ACC_PUBLIC),
 
@@ -16,7 +16,7 @@ public enum AccessModifier {
 
     public final int modifier;
 
-    private AccessModifier(int modifier) {
+    private Access(int modifier) {
         this.modifier = modifier;
     }
 

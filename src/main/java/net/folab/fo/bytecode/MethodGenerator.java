@@ -13,7 +13,7 @@ public class MethodGenerator implements Opcodes {
 
     private final ClassGenerator cg;
 
-    private AccessModifier accessModifier = AccessModifier.PUBLIC;
+    private Access access = Access.PUBLIC;
 
     private JavaType returnType = JavaType.VOID;
 
@@ -35,7 +35,7 @@ public class MethodGenerator implements Opcodes {
         desc += ")";
         desc += returnType.getDescName();
 
-        int modifier = accessModifier.modifier;
+        int modifier = access.modifier;
         MethodVisitor mv = cw.visitMethod(//
                 modifier, // access
                 name, // name
@@ -61,12 +61,12 @@ public class MethodGenerator implements Opcodes {
 
     }
 
-    public AccessModifier getAccessModifier() {
-        return accessModifier;
+    public Access getAccessModifier() {
+        return access;
     }
 
-    public MethodGenerator setAccessModifier(AccessModifier accessModifier) {
-        this.accessModifier = accessModifier;
+    public MethodGenerator setAccessModifier(Access accessModifier) {
+        this.access = accessModifier;
         return this;
     }
 

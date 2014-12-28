@@ -11,9 +11,9 @@ import org.objectweb.asm.ClassWriter;
 
 public class ClassGenerator {
 
-    private JavaVersion javaVersion = JavaVersion.V1_5;
+    private Java java = Java.V1_5;
 
-    private AccessModifier accessModifier = AccessModifier.PUBLIC;
+    private Access accessModifier = Access.PUBLIC;
 
     private String name;
 
@@ -32,7 +32,7 @@ public class ClassGenerator {
             interfaces[i] = this.interfaces[i].getName();
         }
 
-        cw.visit(javaVersion.version, // version
+        cw.visit(java.version, // version
                 accessModifier.modifier, // access
                 name, // name
                 null, // signature
@@ -65,20 +65,20 @@ public class ClassGenerator {
 
     }
 
-    public JavaVersion getJavaVersion() {
-        return javaVersion;
+    public Java getJavaVersion() {
+        return java;
     }
 
-    public ClassGenerator setJavaVersion(JavaVersion javaVersion) {
-        this.javaVersion = javaVersion;
+    public ClassGenerator setJavaVersion(Java javaVersion) {
+        this.java = javaVersion;
         return this;
     }
 
-    public AccessModifier getAccessModifier() {
+    public Access getAccessModifier() {
         return accessModifier;
     }
 
-    public ClassGenerator setAccessModifier(AccessModifier accessModifier) {
+    public ClassGenerator setAccessModifier(Access accessModifier) {
         this.accessModifier = accessModifier;
         return this;
     }
