@@ -24,8 +24,8 @@ public class MethodGenerator extends Block implements Opcodes {
 
     public MethodGenerator(ClassGenerator cg, Access access,
             JavaType returnType, String name, JavaType[] parameterTypes,
-            List<Statement> statements) {
-        super(statements);
+            boolean isStatic, List<Statement> statements) {
+        super(isStatic, statements);
         this.cg = cg;
         this.access = access;
         this.returnType = returnType;
@@ -35,7 +35,7 @@ public class MethodGenerator extends Block implements Opcodes {
 
     public static MethodGenerator build(String name) {
         return new MethodGenerator(null, Access.PUBLIC, JavaType.VOID, name,
-                new JavaType[0], new ArrayList<Statement>());
+                new JavaType[0], false, new ArrayList<Statement>());
     }
 
     public void generate(ClassWriter cw) {
@@ -47,6 +47,8 @@ public class MethodGenerator extends Block implements Opcodes {
         desc += returnType.getDescName();
 
         int modifier = access.modifier;
+        if (isStatic)
+            modifier += ACC_STATIC;
         MethodVisitor mv = cw.visitMethod(//
                 modifier, // access
                 name, // name
@@ -59,7 +61,7 @@ public class MethodGenerator extends Block implements Opcodes {
 
         StatementContext ctx = new StatementContext();
 
-        if ((modifier & ACC_STATIC) != ACC_STATIC) {
+        if (isStatic) {
             ctx.addLocal("this", new JavaType(cg.getName()));
         }
 
@@ -74,7 +76,7 @@ public class MethodGenerator extends Block implements Opcodes {
 
     public MethodGenerator setClassGenerator(ClassGenerator cg) {
         return new MethodGenerator(cg, access, returnType, name,
-                parameterTypes, statements);
+                parameterTypes, isStatic, statements);
     }
 
     public Access getAccessModifier() {
@@ -83,7 +85,7 @@ public class MethodGenerator extends Block implements Opcodes {
 
     public MethodGenerator setAccessModifier(Access accessModifier) {
         return new MethodGenerator(cg, accessModifier, returnType, name,
-                parameterTypes, statements);
+                parameterTypes, isStatic, statements);
     }
 
     public JavaType getReturnType() {
@@ -92,7 +94,7 @@ public class MethodGenerator extends Block implements Opcodes {
 
     public MethodGenerator setReturnType(JavaType returnType) {
         return new MethodGenerator(cg, access, returnType, name,
-                parameterTypes, statements);
+                parameterTypes, isStatic, statements);
     }
 
     public String getName() {
@@ -105,14 +107,14 @@ public class MethodGenerator extends Block implements Opcodes {
 
     public MethodGenerator setParameterTypes(JavaType... parameterTypes) {
         return new MethodGenerator(cg, access, returnType, name,
-                parameterTypes, statements);
+                parameterTypes, isStatic, statements);
     }
 
     public MethodGenerator addStatement(Statement statement) {
         List<Statement> statements = new ArrayList<Statement>(this.statements);
         statements.add(statement);
         return new MethodGenerator(cg, access, returnType, name,
-                parameterTypes, statements);
+                parameterTypes, isStatic, statements);
     }
 
 }
