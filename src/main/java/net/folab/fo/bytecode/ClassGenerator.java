@@ -3,9 +3,11 @@ package net.folab.fo.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.folab.fo.ast.ConstructorInvocation;
+import net.folab.fo.ast.LocalVariable;
+import net.folab.fo.ast.Return;
+
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 public class ClassGenerator {
 
@@ -38,19 +40,20 @@ public class ClassGenerator {
                 interfaces // interfaces
         );
 
-        {
-            MethodVisitor mv = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V",
-                    null, null);
-            mv.visitCode();
-
-            mv.visitVarInsn(Opcodes.ALOAD, 0);
-            mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/Object", "<init>",
-                    "()V");
-
-            mv.visitInsn(Opcodes.RETURN);
-            mv.visitMaxs(1, 1);
-            mv.visitEnd();
-        }
+        // TODO detect constructor of super class
+        new MethodGenerator(this) //
+                .setName("<init>") //
+                .setParameterTypes() //
+                .setReturnType(JavaType.VOID) //
+                .addStatement( //
+                        new ConstructorInvocation( //
+                                "java/lang/Object", //
+                                "()V", //
+                                new LocalVariable("this") //
+                        ) //
+                ) //
+                .addStatement(Return.VOID) //
+                .generate(cw);
 
         for (MethodGenerator mg : methodGenerators) {
             mg.generate(cw);
