@@ -1,16 +1,16 @@
 package net.folab.fo.bytecode;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.folab.fo.ast.Statement;
+import net.folab.fo.ast.Block;
 
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class MethodGenerator implements Opcodes {
+public class MethodGenerator extends Block implements Opcodes {
 
     private final ClassGenerator cg;
 
@@ -22,17 +22,15 @@ public class MethodGenerator implements Opcodes {
 
     private final JavaType[] parameterTypes;
 
-    private final List<Statement> statements;
-
     public MethodGenerator(ClassGenerator cg, Access access,
             JavaType returnType, String name, JavaType[] parameterTypes,
             List<Statement> statements) {
+        super(statements);
         this.cg = cg;
         this.access = access;
         this.returnType = returnType;
         this.name = name;
         this.parameterTypes = parameterTypes;
-        this.statements = Collections.unmodifiableList(statements);
     }
 
     public static MethodGenerator build(String name) {
