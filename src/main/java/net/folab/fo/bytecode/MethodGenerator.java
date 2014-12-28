@@ -39,53 +39,53 @@ public class MethodGenerator implements Opcodes {
 
         mv.visitCode();
 
-        Counter maxStack = new Counter();
-        Counter maxLocals = new Counter();
+        StatementContext ctx = new StatementContext();
 
-        if ((modifier & ACC_STATIC) != ACC_STATIC)
-            maxLocals.inc(); // local variable for `this`
+        if ((modifier & ACC_STATIC) != ACC_STATIC) {
+            ctx.addLocal("this");
+        }
 
         if (returnType.equals(JavaType.VOID)) {
             mv.visitInsn(RETURN);
-            maxStack.clear();
+            ctx.clearStack();
 
         } else if (returnType.equals(JavaType.BOOLEAN)
                 || returnType.equals(JavaType.BYTE)
                 || returnType.equals(JavaType.CHAR)
                 || returnType.equals(JavaType.SHORT)
                 || returnType.equals(JavaType.INT)) {
-            maxStack.inc();
+            ctx.incStack();
             mv.visitInsn(ICONST_0);
             mv.visitInsn(IRETURN);
-            maxStack.clear();
+            ctx.clearStack();
 
         } else if (returnType.equals(JavaType.LONG)) {
-            maxStack.inc().inc();
+            ctx.incStack().incStack();
             mv.visitInsn(LCONST_0);
             mv.visitInsn(LRETURN);
-            maxStack.clear();
+            ctx.clearStack();
 
         } else if (returnType.equals(JavaType.FLOAT)) {
-            maxStack.inc();
+            ctx.incStack();
             mv.visitInsn(FCONST_0);
             mv.visitInsn(FRETURN);
-            maxStack.clear();
+            ctx.clearStack();
 
         } else if (returnType.equals(JavaType.DOUBLE)) {
-            maxStack.inc().inc();
+            ctx.incStack().incStack();
             mv.visitInsn(DCONST_0);
             mv.visitInsn(DRETURN);
-            maxStack.clear();
+            ctx.clearStack();
 
         } else {
-            maxStack.inc();
+            ctx.incStack();
             mv.visitInsn(ACONST_NULL);
             mv.visitInsn(ARETURN);
-            maxStack.clear();
+            ctx.clearStack();
 
         }
 
-        mv.visitMaxs(maxStack.max(), maxLocals.max());
+        mv.visitMaxs(ctx.maxStack(), ctx.maxLocals());
         mv.visitEnd();
 
     }
