@@ -4,7 +4,6 @@ import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.bytecode.StatementContext;
 
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 public class LocalVariable implements Expression {
 
@@ -16,8 +15,9 @@ public class LocalVariable implements Expression {
 
     public void generate(MethodVisitor mv, StatementContext ctx) {
         int index = ctx.indexOfLocal(name);
+        JavaType type = ctx.typeOfLocal(name);
         ctx.incStack();
-        mv.visitVarInsn(Opcodes.ALOAD, index);
+        mv.visitVarInsn(type.loadOpcode, index);
     }
 
     public JavaType getType() {
