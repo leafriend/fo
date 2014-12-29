@@ -12,15 +12,15 @@ import org.objectweb.asm.Opcodes;
 
 public class MethodGenerator extends Block implements Opcodes {
 
-    private final ClassGenerator cg;
+    public final ClassGenerator cg;
 
-    private final Access access;
+    public final Access access;
 
-    private final JavaType returnType;
+    public final JavaType returnType;
 
-    private final String name;
+    public final String name;
 
-    private final JavaType[] parameterTypes;
+    public final JavaType[] parameterTypes;
 
     public MethodGenerator(ClassGenerator cg, Access access,
             JavaType returnType, String name, JavaType[] parameterTypes,
