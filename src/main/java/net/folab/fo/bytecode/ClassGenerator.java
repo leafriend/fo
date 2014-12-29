@@ -42,6 +42,10 @@ public class ClassGenerator {
         this.methodGenerators = methodGenerators;
     }
 
+    public void accept(AstVisitor av) {
+        av.visitClass(this);
+    }
+
     public byte[] generateBytecode() {
 
         ClassWriter cw = new ClassWriter(false);

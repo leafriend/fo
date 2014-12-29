@@ -4,6 +4,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.MethodVisitor;
 
+import net.folab.fo.bytecode.ClassGenerator;
 import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.bytecode.MethodGenerator;
 import net.folab.fo.bytecode.StatementContext;
@@ -18,6 +19,11 @@ public class AstWriter implements AstVisitor, Opcodes {
     public AstWriter(ClassVisitor cv, String className) {
         this.cv = cv;
         this.className = className;
+    }
+
+    public void visitClass(ClassGenerator cg) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public void visitMethod(MethodGenerator mg) {
