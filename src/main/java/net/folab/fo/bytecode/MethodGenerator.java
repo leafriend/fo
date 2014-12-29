@@ -79,8 +79,8 @@ public class MethodGenerator extends Block implements Opcodes {
                 parameterTypes, isStatic, statements);
     }
 
-    public MethodGenerator setAccessModifier(Access accessModifier) {
-        return new MethodGenerator(cg, accessModifier, returnType, name,
+    public MethodGenerator setAccess(Access access) {
+        return new MethodGenerator(cg, access, returnType, name,
                 parameterTypes, isStatic, statements);
     }
 
