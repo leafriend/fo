@@ -1,9 +1,11 @@
-package net.folab.fo.bytecode;
+package net.folab.fo.ast;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import net.folab.fo.ast.AstVisitor;
 import net.folab.fo.ast.AstWriter;
+import net.folab.fo.ast.ClassGenerator;
+import net.folab.fo.bytecode.ByteArrayClassLoader;
 
 import org.junit.After;
 import org.junit.Before;

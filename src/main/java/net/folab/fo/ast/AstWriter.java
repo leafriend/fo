@@ -4,9 +4,7 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.MethodVisitor;
 
-import net.folab.fo.bytecode.ClassGenerator;
 import net.folab.fo.bytecode.JavaType;
-import net.folab.fo.bytecode.MethodGenerator;
 import net.folab.fo.bytecode.StatementContext;
 import net.folab.fo.jast.ConstructorInvocation;
 import net.folab.fo.jast.LocalVariable;

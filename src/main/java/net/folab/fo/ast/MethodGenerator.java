@@ -1,9 +1,10 @@
-package net.folab.fo.bytecode;
+package net.folab.fo.ast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.folab.fo.ast.AstVisitor;
+import net.folab.fo.bytecode.Access;
+import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.jast.Block;
 import net.folab.fo.jast.Statement;
 

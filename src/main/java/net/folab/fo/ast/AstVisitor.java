@@ -1,7 +1,5 @@
 package net.folab.fo.ast;
 
-import net.folab.fo.bytecode.ClassGenerator;
-import net.folab.fo.bytecode.MethodGenerator;
 
 public interface AstVisitor {
 

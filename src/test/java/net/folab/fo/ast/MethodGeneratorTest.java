@@ -1,4 +1,4 @@
-package net.folab.fo.bytecode;
+package net.folab.fo.ast;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -8,6 +8,10 @@ import java.lang.reflect.Method;
 
 import net.folab.fo.ast.AstVisitor;
 import net.folab.fo.ast.AstWriter;
+import net.folab.fo.ast.ClassGenerator;
+import net.folab.fo.ast.MethodGenerator;
+import net.folab.fo.bytecode.ByteArrayClassLoader;
+import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.jast.Literal;
 import net.folab.fo.jast.Return;
 
