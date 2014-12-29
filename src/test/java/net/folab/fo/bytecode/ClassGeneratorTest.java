@@ -2,6 +2,8 @@ package net.folab.fo.bytecode;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import net.folab.fo.ast.AstVisitor;
+import net.folab.fo.ast.AstWriter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +22,7 @@ public class ClassGeneratorTest {
     @Test
     public void testSetName() throws InstantiationException, IllegalAccessException {
 
+        AstVisitor av;
         Class<?> generatedClass;
         byte[] bytecode;
         String name;
@@ -29,9 +32,10 @@ public class ClassGeneratorTest {
         // - - -
 
         name = "MainClass";
+        av = new AstWriter(name);
 
-        bytecode = new ClassGenerator(name) //
-                .generateBytecode();
+        new ClassGenerator(name).accept(av);
+        bytecode = av.toByteArray();
 
         generatedClass = defineClass(name, bytecode);
         assertThat(generatedClass.getName(), is(name));
@@ -42,9 +46,10 @@ public class ClassGeneratorTest {
         // - - -
 
         name = "foo.MainClass";
+        av = new AstWriter(name);
 
-        bytecode = new ClassGenerator(name) //
-                .generateBytecode();
+        new ClassGenerator(name).accept(av);
+        bytecode = av.toByteArray();
 
         generatedClass = defineClass(name, bytecode);
 

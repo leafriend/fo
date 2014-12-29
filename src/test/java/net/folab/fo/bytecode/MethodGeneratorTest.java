@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import net.folab.fo.ast.AstVisitor;
+import net.folab.fo.ast.AstWriter;
 import net.folab.fo.jast.Literal;
 import net.folab.fo.jast.Return;
 
@@ -19,9 +21,12 @@ public class MethodGeneratorTest {
 
     private ClassGenerator cg;
 
+    private AstVisitor av;
+
     @Before
     public void setUp() throws Exception {
         cg = new ClassGenerator(CLASS_NAME);
+        av = new AstWriter(CLASS_NAME);
     }
 
     @After
@@ -40,8 +45,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(Return.VOID) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(void.class));
@@ -60,8 +66,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(false))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(boolean.class));
@@ -83,8 +90,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((byte) 0))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(byte.class));
@@ -106,8 +114,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((char) 0))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(char.class));
@@ -129,8 +138,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((short) 0))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(short.class));
@@ -152,8 +162,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(int.class));
@@ -175,8 +186,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0l))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(long.class));
@@ -198,8 +210,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0f))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(float.class));
@@ -221,8 +234,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(double.class));
@@ -244,8 +258,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.nullValue())) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(Object.class));
@@ -267,8 +282,9 @@ public class MethodGeneratorTest {
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of("baz"))) //
         );
+        av.visitClass(cg);
 
-        Class<?> generatedClass = defineClass(CLASS_NAME, cg.generateBytecode());
+        Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
 
         assertThat(method.getReturnType(), typeCompatibleWith(String.class));

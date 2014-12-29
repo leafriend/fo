@@ -9,4 +9,6 @@ public interface AstVisitor {
 
     public void visitMethod(MethodGenerator mg);
 
+    public byte[] toByteArray();
+
 }

@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.folab.fo.ast.AstVisitor;
-import net.folab.fo.ast.AstWriter;
-import net.folab.fo.jast.ConstructorInvocation;
-import net.folab.fo.jast.LocalVariable;
-import net.folab.fo.jast.Return;
-
-import org.objectweb.asm.ClassWriter;
 
 public class ClassGenerator {
 
@@ -44,49 +38,6 @@ public class ClassGenerator {
 
     public void accept(AstVisitor av) {
         av.visitClass(this);
-    }
-
-    public byte[] generateBytecode() {
-
-        ClassWriter cw = new ClassWriter(false);
-        AstVisitor av = new AstWriter(cw, name);
-
-        String[] interfaces = new String[this.interfaces.length];
-        for (int i = 0; i < interfaces.length; i++) {
-            interfaces[i] = this.interfaces[i].getName();
-        }
-
-        cw.visit(java.version, // version
-                accessModifier.modifier, // access
-                name, // name
-                null, // signature
-                superClass.getName(), // superName
-                interfaces // interfaces
-        );
-
-        // TODO detect constructor of super class
-        MethodGenerator.build("<init>") //
-                .setParameterTypes() //
-                .setReturnType(JavaType.VOID) //
-                .addStatement( //
-                        new ConstructorInvocation( //
-                                "java/lang/Object", //
-                                "()V", //
-                                new LocalVariable("this") //
-                        ) //
-                ) //
-                .addStatement(Return.VOID) //
-                .setClassGenerator(this) //
-                .accept(av);
-
-        for (MethodGenerator mg : methodGenerators) {
-            mg.accept(av);
-        }
-
-        cw.visitEnd();
-
-        return cw.toByteArray();
-
     }
 
     public Java getJavaVersion() {
