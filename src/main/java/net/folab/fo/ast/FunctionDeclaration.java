@@ -10,8 +10,6 @@ import net.folab.fo.jast.Statement;
 
 public class FunctionDeclaration {
 
-    public final ClassGenerator cg;
-
     public final Access access;
 
     public final JavaType returnType;
@@ -22,10 +20,9 @@ public class FunctionDeclaration {
 
     public final Block block;
 
-    public FunctionDeclaration(ClassGenerator cg, Access access,
-            JavaType returnType, String name, JavaType[] parameterTypes,
-            boolean isStatic, List<Statement> statements) {
-        this.cg = cg;
+    public FunctionDeclaration(Access access, JavaType returnType,
+            String name, JavaType[] parameterTypes, boolean isStatic,
+            List<Statement> statements) {
         this.access = access;
         this.returnType = returnType;
         this.name = name;
@@ -34,8 +31,8 @@ public class FunctionDeclaration {
     }
 
     public static FunctionDeclaration build(String name) {
-        return new FunctionDeclaration(null, Access.PUBLIC, JavaType.VOID,
-                name, new JavaType[0], false, new ArrayList<Statement>());
+        return new FunctionDeclaration(Access.PUBLIC, JavaType.VOID, name,
+                new JavaType[0], false, new ArrayList<Statement>());
     }
 
     public void accept(AstVisitor cv) {
@@ -43,30 +40,30 @@ public class FunctionDeclaration {
     }
 
     public FunctionDeclaration setClassGenerator(ClassGenerator cg) {
-        return new FunctionDeclaration(cg, access, returnType, name,
-                parameterTypes, block.isStatic, block.statements);
+        return new FunctionDeclaration(access, returnType, name, parameterTypes,
+                block.isStatic, block.statements);
     }
 
     public FunctionDeclaration setAccess(Access access) {
-        return new FunctionDeclaration(cg, access, returnType, name,
-                parameterTypes, block.isStatic, block.statements);
+        return new FunctionDeclaration(access, returnType, name, parameterTypes,
+                block.isStatic, block.statements);
     }
 
     public FunctionDeclaration setReturnType(JavaType returnType) {
-        return new FunctionDeclaration(cg, access, returnType, name,
-                parameterTypes, block.isStatic, block.statements);
+        return new FunctionDeclaration(access, returnType, name, parameterTypes,
+                block.isStatic, block.statements);
     }
 
     public FunctionDeclaration setParameterTypes(JavaType... parameterTypes) {
-        return new FunctionDeclaration(cg, access, returnType, name,
-                parameterTypes, block.isStatic, block.statements);
+        return new FunctionDeclaration(access, returnType, name, parameterTypes,
+                block.isStatic, block.statements);
     }
 
     public FunctionDeclaration addStatement(Statement statement) {
         List<Statement> statements = new ArrayList<Statement>(block.statements);
         statements.add(statement);
-        return new FunctionDeclaration(cg, access, returnType, name,
-                parameterTypes, block.isStatic, statements);
+        return new FunctionDeclaration(access, returnType, name, parameterTypes,
+                block.isStatic, statements);
     }
 
 }
