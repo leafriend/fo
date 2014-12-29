@@ -25,6 +25,21 @@ public class ClassGenerator {
 
     private List<MethodGenerator> methodGenerators = new ArrayList<MethodGenerator>();
 
+    public ClassGenerator(String name) {
+        this.name = name;
+    }
+
+    public ClassGenerator(Java java, Access accessModifier, String name,
+            JavaType superClass, JavaType[] interfaces,
+            List<MethodGenerator> methodGenerators) {
+        this.java = java;
+        this.accessModifier = accessModifier;
+        this.name = name;
+        this.superClass = superClass;
+        this.interfaces = interfaces;
+        this.methodGenerators = methodGenerators;
+    }
+
     public byte[] generateBytecode() {
 
         ClassWriter cw = new ClassWriter(false);

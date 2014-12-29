@@ -21,7 +21,7 @@ public class MethodGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        cg = new ClassGenerator().setName(CLASS_NAME);
+        cg = new ClassGenerator(CLASS_NAME);
     }
 
     @After

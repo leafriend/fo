@@ -30,8 +30,7 @@ public class ClassGeneratorTest {
 
         name = "MainClass";
 
-        bytecode = new ClassGenerator() //
-                .setName(name)//
+        bytecode = new ClassGenerator(name) //
                 .generateBytecode();
 
         generatedClass = defineClass(name, bytecode);
@@ -44,8 +43,7 @@ public class ClassGeneratorTest {
 
         name = "foo.MainClass";
 
-        bytecode = new ClassGenerator() //
-                .setName(name)//
+        bytecode = new ClassGenerator(name) //
                 .generateBytecode();
 
         generatedClass = defineClass(name, bytecode);
