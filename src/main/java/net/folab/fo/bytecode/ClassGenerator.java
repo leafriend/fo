@@ -13,20 +13,22 @@ import org.objectweb.asm.ClassWriter;
 
 public class ClassGenerator {
 
-    private Java java = Java.V1_5;
+    public final Java java;
 
-    private Access accessModifier = Access.PUBLIC;
+    public final Access accessModifier;
 
-    private String name;
+    public final String name;
 
-    private JavaType superClass = JavaType.OBJECT;
+    public final JavaType superClass;
 
-    private JavaType[] interfaces = new JavaType[0];
+    public final JavaType[] interfaces;
 
-    private List<MethodGenerator> methodGenerators = new ArrayList<MethodGenerator>();
+    public final List<MethodGenerator> methodGenerators;
 
     public ClassGenerator(String name) {
-        this.name = name;
+        this(Java.V1_5, Access.PUBLIC, name.replaceAll("\\.", "/"),
+                JavaType.OBJECT, new JavaType[0],
+                new ArrayList<MethodGenerator>());
     }
 
     public ClassGenerator(Java java, Access accessModifier, String name,
@@ -88,8 +90,8 @@ public class ClassGenerator {
     }
 
     public ClassGenerator setJavaVersion(Java javaVersion) {
-        this.java = javaVersion;
-        return this;
+        return new ClassGenerator(javaVersion, accessModifier, name,
+                superClass, interfaces, methodGenerators);
     }
 
     public Access getAccessModifier() {
@@ -97,8 +99,8 @@ public class ClassGenerator {
     }
 
     public ClassGenerator setAccessModifier(Access accessModifier) {
-        this.accessModifier = accessModifier;
-        return this;
+        return new ClassGenerator(java, accessModifier, name, superClass,
+                interfaces, methodGenerators);
     }
 
     public String getName() {
@@ -106,8 +108,8 @@ public class ClassGenerator {
     }
 
     public ClassGenerator setName(String name) {
-        this.name = name.replaceAll("\\.", "/");
-        return this;
+        return new ClassGenerator(java, accessModifier, name.replaceAll("\\.",
+                "/"), superClass, interfaces, methodGenerators);
     }
 
     public JavaType getSuperClass() {
@@ -115,8 +117,8 @@ public class ClassGenerator {
     }
 
     public ClassGenerator setSuperClass(JavaType superClass) {
-        this.superClass = superClass;
-        return this;
+        return new ClassGenerator(java, accessModifier, name, superClass,
+                interfaces, methodGenerators);
     }
 
     public JavaType[] getInterfaces() {
@@ -124,13 +126,16 @@ public class ClassGenerator {
     }
 
     public ClassGenerator setInterfaces(JavaType... interfaces) {
-        this.interfaces = interfaces;
-        return this;
+        return new ClassGenerator(java, accessModifier, name, superClass,
+                interfaces, methodGenerators);
     }
 
     public ClassGenerator addMethod(MethodGenerator mg) {
-        methodGenerators.add(mg.setClassGenerator(this));
-        return this;
+        List<MethodGenerator> methodGenerators = new ArrayList<MethodGenerator>(
+                this.methodGenerators);
+        methodGenerators.add(mg);
+        return new ClassGenerator(java, accessModifier, name, superClass,
+                interfaces, methodGenerators);
     }
 
 }

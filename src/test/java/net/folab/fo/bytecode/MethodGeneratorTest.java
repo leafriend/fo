@@ -34,7 +34,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.VOID) //
                 .setParameterTypes() //
@@ -54,7 +54,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
@@ -77,7 +77,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
@@ -100,7 +100,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
@@ -123,7 +123,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
@@ -146,7 +146,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
@@ -169,7 +169,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
@@ -192,7 +192,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
@@ -215,7 +215,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
@@ -238,7 +238,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.OBJECT) //
                 .setParameterTypes() //
@@ -261,7 +261,7 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg.addMethod( //
+        cg = cg.addMethod( //
         MethodGenerator.build("bar") //
                 .setReturnType(JavaType.STRING) //
                 .setParameterTypes() //
