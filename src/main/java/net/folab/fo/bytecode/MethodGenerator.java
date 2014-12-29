@@ -3,14 +3,11 @@ package net.folab.fo.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.folab.fo.ast.AstVisitor;
 import net.folab.fo.jast.Block;
 import net.folab.fo.jast.Statement;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-
-public class MethodGenerator extends Block implements Opcodes {
+public class MethodGenerator extends Block {
 
     public final ClassGenerator cg;
 
@@ -38,40 +35,8 @@ public class MethodGenerator extends Block implements Opcodes {
                 new JavaType[0], false, new ArrayList<Statement>());
     }
 
-    public void generate(ClassVisitor cv) {
-        String desc = "(";
-        for (JavaType pt : parameterTypes) {
-            desc += pt.getDescName();
-        }
-        desc += ")";
-        desc += returnType.getDescName();
-
-        int modifier = access.modifier;
-        if (isStatic)
-            modifier += ACC_STATIC;
-        MethodVisitor mv = cv.visitMethod(//
-                modifier, // access
-                name, // name
-                desc, // desc
-                null, // signature
-                null // exceptions
-                );
-
-        mv.visitCode();
-
-        StatementContext ctx = new StatementContext();
-
-        if (!isStatic) {
-            ctx.addLocal("this", new JavaType(cg.getName()));
-        }
-
-        for (Statement statement : statements) {
-            statement.generate(mv, ctx);
-        }
-
-        mv.visitMaxs(ctx.maxStack(), ctx.maxLocals());
-        mv.visitEnd();
-
+    public void accept(AstVisitor cv) {
+        cv.visitMethod(this);
     }
 
     public MethodGenerator setClassGenerator(ClassGenerator cg) {

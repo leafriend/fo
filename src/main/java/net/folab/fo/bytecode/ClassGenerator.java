@@ -3,6 +3,8 @@ package net.folab.fo.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.folab.fo.ast.AstVisitor;
+import net.folab.fo.ast.AstWriter;
 import net.folab.fo.jast.ConstructorInvocation;
 import net.folab.fo.jast.LocalVariable;
 import net.folab.fo.jast.Return;
@@ -26,6 +28,7 @@ public class ClassGenerator {
     public byte[] generateBytecode() {
 
         ClassWriter cw = new ClassWriter(false);
+        AstVisitor av = new AstWriter(cw, name);
 
         String[] interfaces = new String[this.interfaces.length];
         for (int i = 0; i < interfaces.length; i++) {
@@ -53,10 +56,10 @@ public class ClassGenerator {
                 ) //
                 .addStatement(Return.VOID) //
                 .setClassGenerator(this) //
-                .generate(cw);
+                .accept(av);
 
         for (MethodGenerator mg : methodGenerators) {
-            mg.generate(cw);
+            mg.accept(av);
         }
 
         cw.visitEnd();
