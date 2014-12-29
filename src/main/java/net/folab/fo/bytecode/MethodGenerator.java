@@ -79,30 +79,14 @@ public class MethodGenerator extends Block implements Opcodes {
                 parameterTypes, isStatic, statements);
     }
 
-    public Access getAccessModifier() {
-        return access;
-    }
-
     public MethodGenerator setAccessModifier(Access accessModifier) {
         return new MethodGenerator(cg, accessModifier, returnType, name,
                 parameterTypes, isStatic, statements);
     }
 
-    public JavaType getReturnType() {
-        return returnType;
-    }
-
     public MethodGenerator setReturnType(JavaType returnType) {
         return new MethodGenerator(cg, access, returnType, name,
                 parameterTypes, isStatic, statements);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public JavaType[] getParameterTypes() {
-        return parameterTypes;
     }
 
     public MethodGenerator setParameterTypes(JavaType... parameterTypes) {
