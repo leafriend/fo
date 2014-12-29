@@ -38,7 +38,7 @@ public class AstWriter implements AstVisitor, Opcodes {
         );
 
         // TODO detect constructor of super class
-        MethodGenerator.build("<init>") //
+        FunctionDeclaration.build("<init>") //
                 .setParameterTypes() //
                 .setReturnType(JavaType.VOID) //
                 .addStatement( //
@@ -52,7 +52,7 @@ public class AstWriter implements AstVisitor, Opcodes {
                 .setClassGenerator(cg) //
                 .accept(this);
 
-        for (MethodGenerator mg : cg.methodGenerators) {
+        for (FunctionDeclaration mg : cg.fds) {
             mg.accept(this);
         }
 
@@ -60,21 +60,21 @@ public class AstWriter implements AstVisitor, Opcodes {
 
     }
 
-    public void visitMethod(MethodGenerator mg) {
+    public void visitMethod(FunctionDeclaration fd) {
 
         String desc = "(";
-        for (JavaType pt : mg.parameterTypes) {
+        for (JavaType pt : fd.parameterTypes) {
             desc += pt.getDescName();
         }
         desc += ")";
-        desc += mg.returnType.getDescName();
+        desc += fd.returnType.getDescName();
 
-        int modifier = mg.access.modifier;
-        if (mg.block.isStatic)
+        int modifier = fd.access.modifier;
+        if (fd.block.isStatic)
             modifier += ACC_STATIC;
         MethodVisitor mv = cv.visitMethod(//
                 modifier, // access
-                mg.name, // name
+                fd.name, // name
                 desc, // desc
                 null, // signature
                 null // exceptions
@@ -84,11 +84,11 @@ public class AstWriter implements AstVisitor, Opcodes {
 
         StatementContext ctx = new StatementContext();
 
-        if (!mg.block.isStatic) {
+        if (!fd.block.isStatic) {
             ctx.addLocal("this", new JavaType(className));
         }
 
-        for (Statement statement : mg.block.statements) {
+        for (Statement statement : fd.block.statements) {
             statement.generate(mv, ctx);
         }
 

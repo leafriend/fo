@@ -19,23 +19,23 @@ public class ClassGenerator {
 
     public final JavaType[] interfaces;
 
-    public final List<MethodGenerator> methodGenerators;
+    public final List<FunctionDeclaration> fds;
 
     public ClassGenerator(String name) {
         this(Java.V1_5, Access.PUBLIC, name.replaceAll("\\.", "/"),
                 JavaType.OBJECT, new JavaType[0],
-                new ArrayList<MethodGenerator>());
+                new ArrayList<FunctionDeclaration>());
     }
 
     public ClassGenerator(Java java, Access accessModifier, String name,
             JavaType superClass, JavaType[] interfaces,
-            List<MethodGenerator> methodGenerators) {
+            List<FunctionDeclaration> fds) {
         this.java = java;
         this.accessModifier = accessModifier;
         this.name = name;
         this.superClass = superClass;
         this.interfaces = interfaces;
-        this.methodGenerators = methodGenerators;
+        this.fds = fds;
     }
 
     public void accept(AstVisitor av) {
@@ -48,7 +48,7 @@ public class ClassGenerator {
 
     public ClassGenerator setJavaVersion(Java javaVersion) {
         return new ClassGenerator(javaVersion, accessModifier, name,
-                superClass, interfaces, methodGenerators);
+                superClass, interfaces, fds);
     }
 
     public Access getAccessModifier() {
@@ -57,7 +57,7 @@ public class ClassGenerator {
 
     public ClassGenerator setAccessModifier(Access accessModifier) {
         return new ClassGenerator(java, accessModifier, name, superClass,
-                interfaces, methodGenerators);
+                interfaces, fds);
     }
 
     public String getName() {
@@ -66,7 +66,7 @@ public class ClassGenerator {
 
     public ClassGenerator setName(String name) {
         return new ClassGenerator(java, accessModifier, name.replaceAll("\\.",
-                "/"), superClass, interfaces, methodGenerators);
+                "/"), superClass, interfaces, fds);
     }
 
     public JavaType getSuperClass() {
@@ -75,7 +75,7 @@ public class ClassGenerator {
 
     public ClassGenerator setSuperClass(JavaType superClass) {
         return new ClassGenerator(java, accessModifier, name, superClass,
-                interfaces, methodGenerators);
+                interfaces, fds);
     }
 
     public JavaType[] getInterfaces() {
@@ -84,13 +84,13 @@ public class ClassGenerator {
 
     public ClassGenerator setInterfaces(JavaType... interfaces) {
         return new ClassGenerator(java, accessModifier, name, superClass,
-                interfaces, methodGenerators);
+                interfaces, fds);
     }
 
-    public ClassGenerator addMethod(MethodGenerator mg) {
-        List<MethodGenerator> methodGenerators = new ArrayList<MethodGenerator>(
-                this.methodGenerators);
-        methodGenerators.add(mg);
+    public ClassGenerator addMethod(FunctionDeclaration fd) {
+        List<FunctionDeclaration> methodGenerators = new ArrayList<FunctionDeclaration>(
+                this.fds);
+        methodGenerators.add(fd);
         return new ClassGenerator(java, accessModifier, name, superClass,
                 interfaces, methodGenerators);
     }

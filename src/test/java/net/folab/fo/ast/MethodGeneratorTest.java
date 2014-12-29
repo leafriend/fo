@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import net.folab.fo.ast.AstVisitor;
 import net.folab.fo.ast.AstWriter;
 import net.folab.fo.ast.ClassGenerator;
-import net.folab.fo.ast.MethodGenerator;
+import net.folab.fo.ast.FunctionDeclaration;
 import net.folab.fo.bytecode.ByteArrayClassLoader;
 import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.jast.Literal;
@@ -44,7 +44,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.VOID) //
                 .setParameterTypes() //
                 .addStatement(Return.VOID) //
@@ -65,7 +65,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(false))) //
@@ -89,7 +89,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((byte) 0))) //
@@ -113,7 +113,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((char) 0))) //
@@ -137,7 +137,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((short) 0))) //
@@ -161,7 +161,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0))) //
@@ -185,7 +185,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0l))) //
@@ -209,7 +209,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0f))) //
@@ -233,7 +233,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0))) //
@@ -257,7 +257,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.OBJECT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.nullValue())) //
@@ -281,7 +281,7 @@ public class MethodGeneratorTest {
             InvocationTargetException {
 
         cg = cg.addMethod( //
-        MethodGenerator.build("bar") //
+        FunctionDeclaration.build("bar") //
                 .setReturnType(JavaType.STRING) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of("baz"))) //
