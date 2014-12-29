@@ -70,7 +70,7 @@ public class AstWriter implements AstVisitor, Opcodes {
         desc += mg.returnType.getDescName();
 
         int modifier = mg.access.modifier;
-        if (mg.isStatic)
+        if (mg.block.isStatic)
             modifier += ACC_STATIC;
         MethodVisitor mv = cv.visitMethod(//
                 modifier, // access
@@ -84,11 +84,11 @@ public class AstWriter implements AstVisitor, Opcodes {
 
         StatementContext ctx = new StatementContext();
 
-        if (!mg.isStatic) {
+        if (!mg.block.isStatic) {
             ctx.addLocal("this", new JavaType(className));
         }
 
-        for (Statement statement : mg.statements) {
+        for (Statement statement : mg.block.statements) {
             statement.generate(mv, ctx);
         }
 
