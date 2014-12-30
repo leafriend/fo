@@ -9,6 +9,7 @@ public class FunctionBinding<P extends Evaluable<P>, M extends Evaluable<M>>
         this.parameter = parameter;
     }
 
+    @Override
     public Evaluable<M> bind(Function<P, M> value) {
         return value.apply(parameter);
     }

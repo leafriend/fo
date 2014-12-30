@@ -20,6 +20,7 @@ public class ConstructorInvocation implements Statement {
         this.args = args;
     }
 
+    @Override
     public void generate(MethodVisitor mv, StatementContext ctx) {
         for (Expression arg : args) {
             arg.generate(mv, ctx);

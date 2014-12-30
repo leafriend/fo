@@ -63,6 +63,7 @@ public class Literal implements Expression {
         };
     }
 
+    @Override
     public void generate(MethodVisitor mv, StatementContext context) {
         switch (type.getSize()) {
         case 0:
@@ -82,6 +83,7 @@ public class Literal implements Expression {
         }
     }
 
+    @Override
     public JavaType getType() {
         return type;
     }

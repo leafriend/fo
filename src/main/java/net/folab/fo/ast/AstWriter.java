@@ -22,6 +22,7 @@ public class AstWriter implements AstVisitor, Opcodes {
         this.className = className;
     }
 
+    @Override
     public void visitClass(ClassGenerator cg) {
 
         String[] interfaces = new String[cg.interfaces.length];
@@ -60,6 +61,7 @@ public class AstWriter implements AstVisitor, Opcodes {
 
     }
 
+    @Override
     public void visitMethod(FunctionDeclaration fd) {
 
         String desc = "(";
@@ -97,6 +99,7 @@ public class AstWriter implements AstVisitor, Opcodes {
 
     }
 
+    @Override
     public byte[] toByteArray() {
         return cv.toByteArray();
     }

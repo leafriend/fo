@@ -13,6 +13,7 @@ public class add extends Function<Integer, Integer> {
         this.self = self;
     }
 
+    @Override
     public _0 apply(final Evaluable<Integer> param) {
         return new _0(this, param);
     }

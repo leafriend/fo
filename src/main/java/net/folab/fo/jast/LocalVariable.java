@@ -13,6 +13,7 @@ public class LocalVariable implements Expression {
         this.name = name;
     }
 
+    @Override
     public void generate(MethodVisitor mv, StatementContext ctx) {
         int index = ctx.indexOfLocal(name);
         JavaType type = ctx.typeOfLocal(name);
@@ -20,6 +21,7 @@ public class LocalVariable implements Expression {
         mv.visitVarInsn(type.loadOpcode, index);
     }
 
+    @Override
     public JavaType getType() {
         throw new RuntimeException();
     }

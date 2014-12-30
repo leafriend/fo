@@ -31,6 +31,7 @@ public class ToBeCompared {
     public static final Evaluable<Boolean> _t = _e
     //
             .bind(new Binding<Integer, Function<Integer, Boolean>>() {
+                @Override
                 public Function<Integer, Boolean> bind(Integer value) {
                     return value._3B;
                 }
@@ -42,6 +43,7 @@ public class ToBeCompared {
     //
             .bind(new Binding<Boolean, Boolean>() {
 
+                @Override
                 public Evaluable<Boolean> bind(Boolean value) {
                     return value.negate();
                 }

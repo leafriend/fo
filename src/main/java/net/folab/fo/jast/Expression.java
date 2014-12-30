@@ -9,10 +9,12 @@ public interface Expression {
 
     public static final Expression VOID = new Expression() {
 
+        @Override
         public JavaType getType() {
             return JavaType.VOID;
         }
 
+        @Override
         public void generate(MethodVisitor mv, StatementContext context) {
 
         }

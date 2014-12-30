@@ -16,6 +16,7 @@ public class _0 extends Evaluable<Boolean> {
         this.param = param;
     }
 
+    @Override
     public Boolean evaluate() {
         int a0 = self.getSelf().evaluate().getValue();
         int a1 = param.evaluate().getValue();
