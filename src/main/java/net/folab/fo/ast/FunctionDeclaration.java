@@ -16,18 +16,18 @@ public class FunctionDeclaration extends MemberDeclaration {
 
     public final Block block;
 
+    public FunctionDeclaration(String name) {
+        this(Access.PUBLIC, JavaType.VOID, name, JavaType.VOID,
+                new JavaType[0], false, new ArrayList<Statement>());
+    }
+
     public FunctionDeclaration(Access access, JavaType type, String name,
-            JavaType returnType, JavaType[] parameterTypes,
-            boolean isStatic, List<Statement> statements) {
+            JavaType returnType, JavaType[] parameterTypes, boolean isStatic,
+            List<Statement> statements) {
         super(access, type, name);
         this.returnType = returnType;
         this.parameterTypes = parameterTypes;
         this.block = new Block(isStatic, statements);
-    }
-
-    public static FunctionDeclaration build(String name) {
-        return new FunctionDeclaration(Access.PUBLIC, JavaType.VOID, name,
-                JavaType.VOID, new JavaType[0], false, new ArrayList<Statement>());
     }
 
     public void accept(AstVisitor cv) {
@@ -45,8 +45,8 @@ public class FunctionDeclaration extends MemberDeclaration {
     }
 
     public FunctionDeclaration setReturnType(JavaType returnType) {
-        return new FunctionDeclaration(access, returnType, name,
-                returnType, parameterTypes, block.isStatic, block.statements);
+        return new FunctionDeclaration(access, returnType, name, returnType,
+                parameterTypes, block.isStatic, block.statements);
     }
 
     public FunctionDeclaration setParameterTypes(JavaType... parameterTypes) {

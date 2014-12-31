@@ -39,7 +39,7 @@ public class AstWriter implements AstVisitor, Opcodes {
         );
 
         // TODO detect constructor of super class
-        FunctionDeclaration.build("<init>") //
+        new FunctionDeclaration("<init>") //
                 .setParameterTypes() //
                 .setReturnType(JavaType.VOID) //
                 .addStatement( //
