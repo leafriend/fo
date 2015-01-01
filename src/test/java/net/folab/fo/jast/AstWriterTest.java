@@ -3,6 +3,7 @@ package net.folab.fo.jast;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import net.folab.fo.bytecode.ByteArrayClassLoader;
+import net.folab.fo.bytecode.Java;
 import net.folab.fo.jast.AstWriter;
 
 import org.junit.After;
@@ -15,7 +16,7 @@ public class AstWriterTest {
 
     @Before
     public void setUp() throws Exception {
-        writer = new AstWriter();
+        writer = new AstWriter(Java.V1_5);
     }
 
     @After

@@ -9,8 +9,6 @@ import net.folab.fo.bytecode.JavaType;
 
 public class ClassDeclaration {
 
-    public final Java java;
-
     public final Access accessModifier;
 
     public final String name;
@@ -22,15 +20,12 @@ public class ClassDeclaration {
     public final List<MemberDeclaration> mds;
 
     public ClassDeclaration(String name) {
-        this(Java.V1_5, Access.PUBLIC, name.replaceAll("\\.", "/"),
-                JavaType.OBJECT, new JavaType[0],
-                new ArrayList<MemberDeclaration>());
+        this(Access.PUBLIC, name.replaceAll("\\.", "/"), JavaType.OBJECT,
+                new JavaType[0], new ArrayList<MemberDeclaration>());
     }
 
-    public ClassDeclaration(Java java, Access accessModifier, String name,
-            JavaType superClass, JavaType[] interfaces,
-            List<MemberDeclaration> mds) {
-        this.java = java;
+    public ClassDeclaration(Access accessModifier, String name, JavaType superClass,
+            JavaType[] interfaces, List<MemberDeclaration> mds) {
         this.accessModifier = accessModifier;
         this.name = name;
         this.superClass = superClass;
@@ -42,13 +37,9 @@ public class ClassDeclaration {
         av.visitClass(this);
     }
 
-    public Java getJavaVersion() {
-        return java;
-    }
-
     public ClassDeclaration setJavaVersion(Java javaVersion) {
-        return new ClassDeclaration(javaVersion, accessModifier, name,
-                superClass, interfaces, mds);
+        return new ClassDeclaration(accessModifier, name, superClass,
+                interfaces, mds);
     }
 
     public Access getAccessModifier() {
@@ -56,8 +47,8 @@ public class ClassDeclaration {
     }
 
     public ClassDeclaration setAccessModifier(Access accessModifier) {
-        return new ClassDeclaration(java, accessModifier, name, superClass,
-                interfaces, mds);
+        return new ClassDeclaration(accessModifier, name, superClass, interfaces,
+                mds);
     }
 
     public String getName() {
@@ -65,7 +56,7 @@ public class ClassDeclaration {
     }
 
     public ClassDeclaration setName(String name) {
-        return new ClassDeclaration(java, accessModifier, name.replaceAll("\\.",
+        return new ClassDeclaration(accessModifier, name.replaceAll("\\.",
                 "/"), superClass, interfaces, mds);
     }
 
@@ -74,8 +65,8 @@ public class ClassDeclaration {
     }
 
     public ClassDeclaration setSuperClass(JavaType superClass) {
-        return new ClassDeclaration(java, accessModifier, name, superClass,
-                interfaces, mds);
+        return new ClassDeclaration(accessModifier, name, superClass, interfaces,
+                mds);
     }
 
     public JavaType[] getInterfaces() {
@@ -83,16 +74,16 @@ public class ClassDeclaration {
     }
 
     public ClassDeclaration setInterfaces(JavaType... interfaces) {
-        return new ClassDeclaration(java, accessModifier, name, superClass,
-                interfaces, mds);
+        return new ClassDeclaration(accessModifier, name, superClass, interfaces,
+                mds);
     }
 
     public ClassDeclaration addMember(MemberDeclaration mdd) {
         List<MemberDeclaration> methodGenerators = new ArrayList<MemberDeclaration>(
                 this.mds);
         methodGenerators.add(mdd);
-        return new ClassDeclaration(java, accessModifier, name, superClass,
-                interfaces, methodGenerators);
+        return new ClassDeclaration(accessModifier, name, superClass, interfaces,
+                methodGenerators);
     }
 
 }

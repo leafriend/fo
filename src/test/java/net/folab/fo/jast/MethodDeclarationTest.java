@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import net.folab.fo.bytecode.ByteArrayClassLoader;
+import net.folab.fo.bytecode.Java;
 import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.jast.AstVisitor;
 import net.folab.fo.jast.AstWriter;
@@ -28,7 +29,7 @@ public class MethodDeclarationTest {
     @Before
     public void setUp() throws Exception {
         cd = new ClassDeclaration(CLASS_NAME);
-        av = new AstWriter();
+        av = new AstWriter(Java.V1_5);
     }
 
     @After

@@ -4,14 +4,18 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.MethodVisitor;
 
+import net.folab.fo.bytecode.Java;
 import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.bytecode.StatementContext;
 
 public class AstWriter implements AstVisitor, Opcodes {
 
+    private final Java java;
+
     private final ClassWriter cv;
 
-    public AstWriter() {
+    public AstWriter(Java java) {
+        this.java = java;
         this.cv = new ClassWriter(false);
     }
 
@@ -23,7 +27,7 @@ public class AstWriter implements AstVisitor, Opcodes {
             interfaces[i] = cd.interfaces[i].getName();
         }
 
-        cv.visit(cd.java.version, // version
+        cv.visit(java.version, // version
                 cd.accessModifier.modifier, // access
                 cd.name, // name
                 null, // signature
