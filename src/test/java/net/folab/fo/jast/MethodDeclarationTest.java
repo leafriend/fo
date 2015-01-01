@@ -28,7 +28,7 @@ public class MethodDeclarationTest {
     @Before
     public void setUp() throws Exception {
         cd = new ClassDeclaration(CLASS_NAME);
-        av = new AstWriter(CLASS_NAME);
+        av = new AstWriter();
     }
 
     @After

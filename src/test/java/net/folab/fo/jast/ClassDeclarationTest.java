@@ -33,7 +33,7 @@ public class ClassDeclarationTest {
         // - - -
 
         name = "MainClass";
-        av = new AstWriter(name);
+        av = new AstWriter();
 
         new ClassDeclaration(name).accept(av);
         bytecode = av.toByteArray();
@@ -47,7 +47,7 @@ public class ClassDeclarationTest {
         // - - -
 
         name = "foo.MainClass";
-        av = new AstWriter(name);
+        av = new AstWriter();
 
         new ClassDeclaration(name).accept(av);
         bytecode = av.toByteArray();

@@ -11,11 +11,8 @@ public class AstWriter implements AstVisitor, Opcodes {
 
     private final ClassWriter cv;
 
-    private String className;
-
-    public AstWriter(String className) {
+    public AstWriter() {
         this.cv = new ClassWriter(false);
-        this.className = className;
     }
 
     @Override
@@ -101,7 +98,7 @@ public class AstWriter implements AstVisitor, Opcodes {
         StatementContext ctx = new StatementContext();
 
         if (!md.block.isStatic) {
-            ctx.addLocal("this", new JavaType(className));
+            ctx.addLocal("this", new JavaType(md.cd.name));
         }
 
         for (Statement statement : md.block.statements) {
