@@ -1,4 +1,4 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -6,12 +6,10 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import net.folab.fo.ast.AstVisitor;
-import net.folab.fo.ast.AstWriter;
-import net.folab.fo.ast.ClassGenerator;
-import net.folab.fo.ast.FunctionDeclaration;
 import net.folab.fo.bytecode.ByteArrayClassLoader;
 import net.folab.fo.bytecode.JavaType;
+import net.folab.fo.jast.AstVisitor;
+import net.folab.fo.jast.AstWriter;
 import net.folab.fo.jast.Literal;
 import net.folab.fo.jast.Return;
 
@@ -19,17 +17,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MethodGeneratorTest {
+public class MethodDeclarationTest {
 
     private static final String CLASS_NAME = "foo";
 
-    private ClassGenerator cg;
+    private ClassDeclaration cd;
 
     private AstVisitor av;
 
     @Before
     public void setUp() throws Exception {
-        cg = new ClassGenerator(CLASS_NAME);
+        cd = new ClassDeclaration(CLASS_NAME);
         av = new AstWriter(CLASS_NAME);
     }
 
@@ -43,13 +41,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.VOID) //
                 .setParameterTypes() //
                 .addStatement(Return.VOID) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -64,13 +62,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(false))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -88,13 +86,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((byte) 0))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -112,13 +110,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((char) 0))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -136,13 +134,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((short) 0))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -160,13 +158,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -184,13 +182,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0l))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -208,13 +206,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0f))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -232,13 +230,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -256,13 +254,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.OBJECT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.nullValue())) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");
@@ -280,13 +278,13 @@ public class MethodGeneratorTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cg = cg.addMethod( //
-        new FunctionDeclaration("bar") //
+        cd = cd.addMethod( //
+        new MethodDeclaration("bar") //
                 .setReturnType(JavaType.STRING) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of("baz"))) //
         );
-        av.visitClass(cg);
+        av.visitClass(cd);
 
         Class<?> generatedClass = defineClass(CLASS_NAME, av.toByteArray());
         Method method = generatedClass.getDeclaredMethod("bar");

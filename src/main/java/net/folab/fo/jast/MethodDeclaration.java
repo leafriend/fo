@@ -1,4 +1,4 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.jast.Block;
 import net.folab.fo.jast.Statement;
 
-public class FunctionDeclaration extends MemberDeclaration {
+public class MethodDeclaration extends MemberDeclaration {
 
     public final JavaType returnType;
 
@@ -16,12 +16,12 @@ public class FunctionDeclaration extends MemberDeclaration {
 
     public final Block block;
 
-    public FunctionDeclaration(String name) {
+    public MethodDeclaration(String name) {
         this(Access.PUBLIC, JavaType.VOID, name, JavaType.VOID,
                 new JavaType[0], false, new ArrayList<Statement>());
     }
 
-    public FunctionDeclaration(Access access, JavaType type, String name,
+    public MethodDeclaration(Access access, JavaType type, String name,
             JavaType returnType, JavaType[] parameterTypes, boolean isStatic,
             List<Statement> statements) {
         super(access, type, name);
@@ -30,25 +30,29 @@ public class FunctionDeclaration extends MemberDeclaration {
         this.block = new Block(isStatic, statements);
     }
 
-    public FunctionDeclaration setAccess(Access access) {
-        return new FunctionDeclaration(access, type, name, returnType,
+    public void accept(AstVisitor av) {
+        av.visitMethod(this);
+    }
+
+    public MethodDeclaration setAccess(Access access) {
+        return new MethodDeclaration(access, type, name, returnType,
                 parameterTypes, block.isStatic, block.statements);
     }
 
-    public FunctionDeclaration setReturnType(JavaType returnType) {
-        return new FunctionDeclaration(access, returnType, name, returnType,
+    public MethodDeclaration setReturnType(JavaType returnType) {
+        return new MethodDeclaration(access, returnType, name, returnType,
                 parameterTypes, block.isStatic, block.statements);
     }
 
-    public FunctionDeclaration setParameterTypes(JavaType... parameterTypes) {
-        return new FunctionDeclaration(access, type, name, returnType,
+    public MethodDeclaration setParameterTypes(JavaType... parameterTypes) {
+        return new MethodDeclaration(access, type, name, returnType,
                 parameterTypes, block.isStatic, block.statements);
     }
 
-    public FunctionDeclaration addStatement(Statement statement) {
+    public MethodDeclaration addStatement(Statement statement) {
         List<Statement> statements = new ArrayList<Statement>(block.statements);
         statements.add(statement);
-        return new FunctionDeclaration(access, type, name, returnType,
+        return new MethodDeclaration(access, type, name, returnType,
                 parameterTypes, block.isStatic, statements);
     }
 

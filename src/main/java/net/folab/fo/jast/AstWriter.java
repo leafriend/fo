@@ -1,4 +1,4 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -6,10 +6,6 @@ import org.objectweb.asm.MethodVisitor;
 
 import net.folab.fo.bytecode.JavaType;
 import net.folab.fo.bytecode.StatementContext;
-import net.folab.fo.jast.ConstructorInvocation;
-import net.folab.fo.jast.LocalVariable;
-import net.folab.fo.jast.Return;
-import net.folab.fo.jast.Statement;
 
 public class AstWriter implements AstVisitor, Opcodes {
 
@@ -23,23 +19,23 @@ public class AstWriter implements AstVisitor, Opcodes {
     }
 
     @Override
-    public void visitClass(ClassGenerator cg) {
+    public void visitClass(ClassDeclaration cd) {
 
-        String[] interfaces = new String[cg.interfaces.length];
+        String[] interfaces = new String[cd.interfaces.length];
         for (int i = 0; i < interfaces.length; i++) {
-            interfaces[i] = cg.interfaces[i].getName();
+            interfaces[i] = cd.interfaces[i].getName();
         }
 
-        cv.visit(cg.java.version, // version
-                cg.accessModifier.modifier, // access
-                cg.name, // name
+        cv.visit(cd.java.version, // version
+                cd.accessModifier.modifier, // access
+                cd.name, // name
                 null, // signature
-                cg.superClass.getName(), // superName
+                cd.superClass.getName(), // superName
                 interfaces // interfaces
         );
 
         // TODO detect constructor of super class
-        new FunctionDeclaration("<init>") //
+        new MethodDeclaration("<init>") //
                 .setParameterTypes() //
                 .setReturnType(JavaType.VOID) //
                 .addStatement( //
@@ -52,7 +48,7 @@ public class AstWriter implements AstVisitor, Opcodes {
                 .addStatement(Return.VOID) //
                 .accept(this);
 
-        for (FunctionDeclaration mg : cg.fds) {
+        for (MethodDeclaration mg : cd.fds) {
             mg.accept(this);
         }
 
@@ -61,21 +57,21 @@ public class AstWriter implements AstVisitor, Opcodes {
     }
 
     @Override
-    public void visitMethod(FunctionDeclaration fd) {
+    public void visitMethod(MethodDeclaration md) {
 
         String desc = "(";
-        for (JavaType pt : fd.parameterTypes) {
+        for (JavaType pt : md.parameterTypes) {
             desc += pt.getDescName();
         }
         desc += ")";
-        desc += fd.returnType.getDescName();
+        desc += md.returnType.getDescName();
 
-        int modifier = fd.access.modifier;
-        if (fd.block.isStatic)
+        int modifier = md.access.modifier;
+        if (md.block.isStatic)
             modifier += ACC_STATIC;
         MethodVisitor mv = cv.visitMethod(//
                 modifier, // access
-                fd.name, // name
+                md.name, // name
                 desc, // desc
                 null, // signature
                 null // exceptions
@@ -85,11 +81,11 @@ public class AstWriter implements AstVisitor, Opcodes {
 
         StatementContext ctx = new StatementContext();
 
-        if (!fd.block.isStatic) {
+        if (!md.block.isStatic) {
             ctx.addLocal("this", new JavaType(className));
         }
 
-        for (Statement statement : fd.block.statements) {
+        for (Statement statement : md.block.statements) {
             statement.generate(mv, ctx);
         }
 

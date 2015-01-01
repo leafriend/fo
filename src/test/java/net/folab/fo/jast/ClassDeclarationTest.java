@@ -1,17 +1,16 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-import net.folab.fo.ast.AstVisitor;
-import net.folab.fo.ast.AstWriter;
-import net.folab.fo.ast.ClassGenerator;
 import net.folab.fo.bytecode.ByteArrayClassLoader;
+import net.folab.fo.jast.AstVisitor;
+import net.folab.fo.jast.AstWriter;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ClassGeneratorTest {
+public class ClassDeclarationTest {
 
     @Before
     public void setUp() throws Exception {
@@ -36,7 +35,7 @@ public class ClassGeneratorTest {
         name = "MainClass";
         av = new AstWriter(name);
 
-        new ClassGenerator(name).accept(av);
+        new ClassDeclaration(name).accept(av);
         bytecode = av.toByteArray();
 
         generatedClass = defineClass(name, bytecode);
@@ -50,7 +49,7 @@ public class ClassGeneratorTest {
         name = "foo.MainClass";
         av = new AstWriter(name);
 
-        new ClassGenerator(name).accept(av);
+        new ClassDeclaration(name).accept(av);
         bytecode = av.toByteArray();
 
         generatedClass = defineClass(name, bytecode);

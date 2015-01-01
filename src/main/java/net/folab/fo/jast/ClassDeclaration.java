@@ -1,4 +1,4 @@
-package net.folab.fo.ast;
+package net.folab.fo.jast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import net.folab.fo.bytecode.Access;
 import net.folab.fo.bytecode.Java;
 import net.folab.fo.bytecode.JavaType;
 
-public class ClassGenerator {
+public class ClassDeclaration {
 
     public final Java java;
 
@@ -19,17 +19,17 @@ public class ClassGenerator {
 
     public final JavaType[] interfaces;
 
-    public final List<FunctionDeclaration> fds;
+    public final List<MethodDeclaration> fds;
 
-    public ClassGenerator(String name) {
+    public ClassDeclaration(String name) {
         this(Java.V1_5, Access.PUBLIC, name.replaceAll("\\.", "/"),
                 JavaType.OBJECT, new JavaType[0],
-                new ArrayList<FunctionDeclaration>());
+                new ArrayList<MethodDeclaration>());
     }
 
-    public ClassGenerator(Java java, Access accessModifier, String name,
+    public ClassDeclaration(Java java, Access accessModifier, String name,
             JavaType superClass, JavaType[] interfaces,
-            List<FunctionDeclaration> fds) {
+            List<MethodDeclaration> fds) {
         this.java = java;
         this.accessModifier = accessModifier;
         this.name = name;
@@ -38,12 +38,16 @@ public class ClassGenerator {
         this.fds = fds;
     }
 
+    public void accept(AstVisitor av) {
+        av.visitClass(this);
+    }
+
     public Java getJavaVersion() {
         return java;
     }
 
-    public ClassGenerator setJavaVersion(Java javaVersion) {
-        return new ClassGenerator(javaVersion, accessModifier, name,
+    public ClassDeclaration setJavaVersion(Java javaVersion) {
+        return new ClassDeclaration(javaVersion, accessModifier, name,
                 superClass, interfaces, fds);
     }
 
@@ -51,8 +55,8 @@ public class ClassGenerator {
         return accessModifier;
     }
 
-    public ClassGenerator setAccessModifier(Access accessModifier) {
-        return new ClassGenerator(java, accessModifier, name, superClass,
+    public ClassDeclaration setAccessModifier(Access accessModifier) {
+        return new ClassDeclaration(java, accessModifier, name, superClass,
                 interfaces, fds);
     }
 
@@ -60,8 +64,8 @@ public class ClassGenerator {
         return name;
     }
 
-    public ClassGenerator setName(String name) {
-        return new ClassGenerator(java, accessModifier, name.replaceAll("\\.",
+    public ClassDeclaration setName(String name) {
+        return new ClassDeclaration(java, accessModifier, name.replaceAll("\\.",
                 "/"), superClass, interfaces, fds);
     }
 
@@ -69,8 +73,8 @@ public class ClassGenerator {
         return superClass;
     }
 
-    public ClassGenerator setSuperClass(JavaType superClass) {
-        return new ClassGenerator(java, accessModifier, name, superClass,
+    public ClassDeclaration setSuperClass(JavaType superClass) {
+        return new ClassDeclaration(java, accessModifier, name, superClass,
                 interfaces, fds);
     }
 
@@ -78,16 +82,16 @@ public class ClassGenerator {
         return interfaces;
     }
 
-    public ClassGenerator setInterfaces(JavaType... interfaces) {
-        return new ClassGenerator(java, accessModifier, name, superClass,
+    public ClassDeclaration setInterfaces(JavaType... interfaces) {
+        return new ClassDeclaration(java, accessModifier, name, superClass,
                 interfaces, fds);
     }
 
-    public ClassGenerator addMethod(FunctionDeclaration fd) {
-        List<FunctionDeclaration> methodGenerators = new ArrayList<FunctionDeclaration>(
+    public ClassDeclaration addMethod(MethodDeclaration fd) {
+        List<MethodDeclaration> methodGenerators = new ArrayList<MethodDeclaration>(
                 this.fds);
         methodGenerators.add(fd);
-        return new ClassGenerator(java, accessModifier, name, superClass,
+        return new ClassDeclaration(java, accessModifier, name, superClass,
                 interfaces, methodGenerators);
     }
 
