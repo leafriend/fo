@@ -3,7 +3,6 @@ package net.folab.fo.jast;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import net.folab.fo.bytecode.ByteArrayClassLoader;
-import net.folab.fo.jast.AstVisitor;
 import net.folab.fo.jast.AstWriter;
 
 import org.junit.After;
@@ -12,8 +11,11 @@ import org.junit.Test;
 
 public class AstWriterTest {
 
+    private AstWriter writer;
+
     @Before
     public void setUp() throws Exception {
+        writer = new AstWriter();
     }
 
     @After
@@ -23,7 +25,6 @@ public class AstWriterTest {
     @Test
     public void testSetName() throws InstantiationException, IllegalAccessException {
 
-        AstVisitor av;
         Class<?> generatedClass;
         byte[] bytecode;
         String name;
@@ -33,10 +34,9 @@ public class AstWriterTest {
         // - - -
 
         name = "MainClass";
-        av = new AstWriter();
 
-        new ClassDeclaration(name).accept(av);
-        bytecode = av.toByteArray();
+        new ClassDeclaration(name).accept(writer);
+        bytecode = writer.toByteArray();
 
         generatedClass = defineClass(name, bytecode);
         assertThat(generatedClass.getName(), is(name));
@@ -47,10 +47,10 @@ public class AstWriterTest {
         // - - -
 
         name = "foo.MainClass";
-        av = new AstWriter();
+        writer = new AstWriter();
 
-        new ClassDeclaration(name).accept(av);
-        bytecode = av.toByteArray();
+        new ClassDeclaration(name).accept(writer);
+        bytecode = writer.toByteArray();
 
         generatedClass = defineClass(name, bytecode);
 
