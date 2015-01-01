@@ -34,11 +34,6 @@ public class FunctionDeclaration extends MemberDeclaration {
         cv.visitMethod(this);
     }
 
-    public FunctionDeclaration setClassGenerator(ClassGenerator cg) {
-        return new FunctionDeclaration(access, type, name, returnType,
-                parameterTypes, block.isStatic, block.statements);
-    }
-
     public FunctionDeclaration setAccess(Access access) {
         return new FunctionDeclaration(access, type, name, returnType,
                 parameterTypes, block.isStatic, block.statements);

@@ -50,7 +50,6 @@ public class AstWriter implements AstVisitor, Opcodes {
                         ) //
                 ) //
                 .addStatement(Return.VOID) //
-                .setClassGenerator(cg) //
                 .accept(this);
 
         for (FunctionDeclaration mg : cg.fds) {
