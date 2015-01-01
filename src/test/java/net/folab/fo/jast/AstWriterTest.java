@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ClassDeclarationTest {
+public class AstWriterTest {
 
     @Before
     public void setUp() throws Exception {
