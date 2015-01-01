@@ -16,15 +16,15 @@ public class MethodDeclaration extends MemberDeclaration {
 
     public final Block block;
 
-    public MethodDeclaration(String name) {
-        this(Access.PUBLIC, JavaType.VOID, name, JavaType.VOID,
+    public MethodDeclaration(ClassDeclaration cd, String name) {
+        this(cd, Access.PUBLIC, JavaType.VOID, name, JavaType.VOID,
                 new JavaType[0], false, new ArrayList<Statement>());
     }
 
-    public MethodDeclaration(Access access, JavaType type, String name,
+    public MethodDeclaration(ClassDeclaration cd, Access access, JavaType type, String name,
             JavaType returnType, JavaType[] parameterTypes, boolean isStatic,
             List<Statement> statements) {
-        super(access, type, name);
+        super(cd, access, type, name);
         this.returnType = returnType;
         this.parameterTypes = parameterTypes;
         this.block = new Block(isStatic, statements);
@@ -36,24 +36,24 @@ public class MethodDeclaration extends MemberDeclaration {
     }
 
     public MethodDeclaration setAccess(Access access) {
-        return new MethodDeclaration(access, type, name, returnType,
+        return new MethodDeclaration(cd, access, type, name, returnType,
                 parameterTypes, block.isStatic, block.statements);
     }
 
     public MethodDeclaration setReturnType(JavaType returnType) {
-        return new MethodDeclaration(access, returnType, name, returnType,
+        return new MethodDeclaration(cd, access, returnType, name, returnType,
                 parameterTypes, block.isStatic, block.statements);
     }
 
     public MethodDeclaration setParameterTypes(JavaType... parameterTypes) {
-        return new MethodDeclaration(access, type, name, returnType,
+        return new MethodDeclaration(cd, access, type, name, returnType,
                 parameterTypes, block.isStatic, block.statements);
     }
 
     public MethodDeclaration addStatement(Statement statement) {
         List<Statement> statements = new ArrayList<Statement>(block.statements);
         statements.add(statement);
-        return new MethodDeclaration(access, type, name, returnType,
+        return new MethodDeclaration(cd, access, type, name, returnType,
                 parameterTypes, block.isStatic, statements);
     }
 

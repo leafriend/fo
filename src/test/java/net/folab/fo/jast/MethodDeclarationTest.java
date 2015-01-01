@@ -42,7 +42,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.VOID) //
                 .setParameterTypes() //
                 .addStatement(Return.VOID) //
@@ -63,7 +63,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(false))) //
@@ -87,7 +87,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((byte) 0))) //
@@ -111,7 +111,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((char) 0))) //
@@ -135,7 +135,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of((short) 0))) //
@@ -159,7 +159,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0))) //
@@ -183,7 +183,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0l))) //
@@ -207,7 +207,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0f))) //
@@ -231,7 +231,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of(0.0))) //
@@ -255,7 +255,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.OBJECT) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.nullValue())) //
@@ -279,7 +279,7 @@ public class MethodDeclarationTest {
             InvocationTargetException {
 
         cd = cd.addMember( //
-        new MethodDeclaration("bar") //
+        new MethodDeclaration(cd, "bar") //
                 .setReturnType(JavaType.STRING) //
                 .setParameterTypes() //
                 .addStatement(new Return(Literal.of("baz"))) //

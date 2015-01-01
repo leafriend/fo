@@ -5,13 +5,17 @@ import net.folab.fo.bytecode.JavaType;
 
 public class MemberDeclaration {
 
+    public final ClassDeclaration cd;
+
     public final Access access;
 
     public final JavaType type;
 
     public final String name;
 
-    public MemberDeclaration(Access access, JavaType type, String name) {
+    public MemberDeclaration(ClassDeclaration cd, Access access, JavaType type,
+            String name) {
+        this.cd = cd;
         this.access = access;
         this.type = type;
         this.name = name;
