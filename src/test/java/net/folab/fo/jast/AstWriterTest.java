@@ -23,40 +23,27 @@ public class AstWriterTest {
     }
 
     @Test
-    public void testSetName() throws InstantiationException, IllegalAccessException {
+    public void testVisitClass_0() throws InstantiationException,
+            IllegalAccessException {
+        testVisitClass("MainClass");
+    }
 
-        Class<?> generatedClass;
-        byte[] bytecode;
-        String name;
+    @Test
+    public void testVisitClass_1() throws InstantiationException,
+            IllegalAccessException {
+        testVisitClass("foo.MainClass");
+    }
 
-        Object obj;
+    private void testVisitClass(String name) throws InstantiationException,
+            IllegalAccessException {
 
-        // - - -
+        writer.visitClass(new ClassDeclaration(name));
+        byte[] bytecode = writer.toByteArray();
 
-        name = "MainClass";
-
-        new ClassDeclaration(name).accept(writer);
-        bytecode = writer.toByteArray();
-
-        generatedClass = defineClass(name, bytecode);
+        Class<?> generatedClass = defineClass(name, bytecode);
         assertThat(generatedClass.getName(), is(name));
 
-        obj = generatedClass.newInstance();
-        assertThat(obj, is(not(nullValue())));
-
-        // - - -
-
-        name = "foo.MainClass";
-        writer = new AstWriter();
-
-        new ClassDeclaration(name).accept(writer);
-        bytecode = writer.toByteArray();
-
-        generatedClass = defineClass(name, bytecode);
-
-        assertThat(generatedClass.getName(), is(name));
-
-        obj = generatedClass.newInstance();
+        Object obj = generatedClass.newInstance();
         assertThat(obj, is(not(nullValue())));
 
     }
