@@ -41,7 +41,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.VOID) //
                 .setParameterTypes() //
@@ -62,7 +62,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.BOOLEAN) //
                 .setParameterTypes() //
@@ -86,7 +86,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.BYTE) //
                 .setParameterTypes() //
@@ -110,7 +110,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.CHAR) //
                 .setParameterTypes() //
@@ -134,7 +134,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.SHORT) //
                 .setParameterTypes() //
@@ -158,7 +158,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.INT) //
                 .setParameterTypes() //
@@ -182,7 +182,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.LONG) //
                 .setParameterTypes() //
@@ -206,7 +206,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.FLOAT) //
                 .setParameterTypes() //
@@ -230,7 +230,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.DOUBLE) //
                 .setParameterTypes() //
@@ -254,7 +254,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.OBJECT) //
                 .setParameterTypes() //
@@ -278,7 +278,7 @@ public class MethodDeclarationTest {
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
 
-        cd = cd.addMethod( //
+        cd = cd.addMember( //
         new MethodDeclaration("bar") //
                 .setReturnType(JavaType.STRING) //
                 .setParameterTypes() //

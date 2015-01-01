@@ -30,6 +30,7 @@ public class MethodDeclaration extends MemberDeclaration {
         this.block = new Block(isStatic, statements);
     }
 
+    @Override
     public void accept(AstVisitor av) {
         av.visitMethod(this);
     }

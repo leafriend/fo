@@ -17,4 +17,8 @@ public class MemberDeclaration {
         this.name = name;
     }
 
+    public void accept(AstVisitor av) {
+        av.visitField(this);
+    }
+
 }

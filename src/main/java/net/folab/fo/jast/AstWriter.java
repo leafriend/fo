@@ -48,11 +48,30 @@ public class AstWriter implements AstVisitor, Opcodes {
                 .addStatement(Return.VOID) //
                 .accept(this);
 
-        for (MethodDeclaration mg : cd.fds) {
-            mg.accept(this);
+        for (MemberDeclaration md : cd.mds) {
+            if (md instanceof MethodDeclaration) {
+                MethodDeclaration mm = (MethodDeclaration) md;
+                mm.accept(this);
+            }
         }
 
         cv.visitEnd();
+
+    }
+
+    @Override
+    public void visitField(MemberDeclaration md) {
+        String desc = md.type.getDescName();
+
+        int modifier = md.access.modifier;
+//        if (md.isStatic)
+//            modifier += ACC_STATIC;
+        cv.visitField(modifier, // access
+                md.name, // name
+                desc, // desc
+                null, // signature
+                null // value
+        );
 
     }
 
