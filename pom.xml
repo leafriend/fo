@@ -85,6 +85,12 @@
             <version>2.2.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.folab</groupId>
+            <artifactId>metaj</artifactId>
+            <version>[0.0.1-SNAPSHOT,]</version>
+        </dependency>
+
     </dependencies>
 
 </project>

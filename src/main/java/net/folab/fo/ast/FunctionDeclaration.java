@@ -3,10 +3,10 @@ package net.folab.fo.ast;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.folab.fo.bytecode.Access;
-import net.folab.fo.bytecode.JavaType;
-import net.folab.fo.jast.Block;
-import net.folab.fo.jast.Statement;
+import net.folab.metaj.bytecode.Access;
+import net.folab.metaj.bytecode.JavaType;
+import net.folab.metaj.jast.Block;
+import net.folab.metaj.jast.Statement;
 
 public class FunctionDeclaration extends MemberDeclaration {
 

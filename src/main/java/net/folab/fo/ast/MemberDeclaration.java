@@ -1,7 +1,7 @@
 package net.folab.fo.ast;
 
-import net.folab.fo.bytecode.Access;
-import net.folab.fo.bytecode.JavaType;
+import net.folab.metaj.bytecode.Access;
+import net.folab.metaj.bytecode.JavaType;
 
 public class MemberDeclaration {
 
